@@ -15,9 +15,9 @@
                prefWidth="663.0">
         <columns>
             <TableColumn id="col_id" fx:id="tableColCustomerViewId" prefWidth="97.0" text="ID"/>
-            <TableColumn id="col_med_name" fx:id="tableColCustomerViewName" prefWidth="114.0" text="Name"/>
-            <TableColumn id="col_price" fx:id="tableColCustomerViewWANumber" prefWidth="120.0" text="WA Number"/>
-            <TableColumn id="col_stock" fx:id="tableColCustomerViewEmail" prefWidth="62.0" text="Email"/>
+            <TableColumn id="col_name" fx:id="tableColCustomerViewName" prefWidth="114.0" text="Name"/>
+            <TableColumn id="col_wa_number" fx:id="tableColCustomerViewWANumber" prefWidth="120.0" text="WA Number"/>
+            <TableColumn id="col_email" fx:id="tableColCustomerViewEmail" prefWidth="62.0" text="Email"/>
             <TableColumn id="col_description" fx:id="tableColCustomerViewDesc" prefWidth="117.0" text="Description"/>
             <TableColumn fx:id="tableColCustomerViewCreated" prefWidth="75.0" text="Created"/>
             <TableColumn fx:id="tableColCustomerViewUpdated" prefWidth="75.0" text="Updated"/>

@@ -4,6 +4,7 @@ module org.app.projectpharmacy {
 
     requires org.controlsfx.controls;
     requires org.kordamp.bootstrapfx.core;
+    requires java.sql;
 
     opens org.app.projectpharmacy to javafx.fxml;
     exports org.app.projectpharmacy;
