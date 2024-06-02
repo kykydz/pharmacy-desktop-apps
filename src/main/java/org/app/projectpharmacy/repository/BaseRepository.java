@@ -17,13 +17,12 @@ public abstract class BaseRepository<T> {
 
     public abstract String getTableName();
 
-    public T create(T entity, String insertQuery) throws SQLException {
+    public void create(String insertQuery) throws SQLException {
         try (PreparedStatement ps = connection.prepareStatement(insertQuery)) {
             // Implement logic to set parameter values based on entity properties
             // (assuming insertQuery already has placeholders for values)
             ps.executeUpdate();
         }
-        return entity;
     }
 
     public List<T> getMany(String query, Object... params) throws SQLException {
@@ -37,6 +36,8 @@ public abstract class BaseRepository<T> {
             while (rs.next()) {
                 results.add(mapResultSetToEntity(rs));
             }
+        } catch (SQLException e) {
+            throw  new RuntimeException(e);
         }
         return results;
     }

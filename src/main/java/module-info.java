@@ -10,4 +10,6 @@ module org.app.projectpharmacy {
     exports org.app.projectpharmacy;
     exports org.app.projectpharmacy.controller;
     opens org.app.projectpharmacy.controller to javafx.fxml;
+    exports org.app.projectpharmacy.services;
+    opens org.app.projectpharmacy.services to javafx.fxml;
 }

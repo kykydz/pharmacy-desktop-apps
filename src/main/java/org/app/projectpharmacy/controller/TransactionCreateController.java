@@ -1,23 +1,33 @@
 package org.app.projectpharmacy.controller;
 
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
 public class TransactionCreateController {
     @javafx.fxml.FXML
-    private TextField inputTextMedicationName;
+    private AnchorPane trxCreatePane;
     @javafx.fxml.FXML
-    private TextArea inputTextAreaNewTrxDescription;
+    private Button btnTrxCreateClose;
     @javafx.fxml.FXML
-    private Button btnNewTrxCreate;
+    private TableColumn tableColTrxCreateStockId;
     @javafx.fxml.FXML
-    private TextField inputTextNewTrxPrice;
+    private TableColumn tableColTrxCreateItemPrice;
     @javafx.fxml.FXML
-    private TextField inputTextNewTrxStock;
+    private TableView tableViewTrxCreateItems;
     @javafx.fxml.FXML
-    private AnchorPane newTrxPane;
+    private TableColumn tableColTrxCreateItemId;
     @javafx.fxml.FXML
-    private Button btnNewTrxCancel;
+    private TableColumn tableColTrxCreateItemSubTotalPrice;
+    @javafx.fxml.FXML
+    private TextField textInputTrxCreateCustomerName;
+    @javafx.fxml.FXML
+    private Button btnTrxCreateNewCustomer;
+    @javafx.fxml.FXML
+    private Button btnTrxCreateFindCustomer;
+    @javafx.fxml.FXML
+    private Button btnTrxCreateClose2;
+    @javafx.fxml.FXML
+    private TextField textInputTrxCreateCustomerId;
+    @javafx.fxml.FXML
+    private TableColumn tableColTrxCreateItemQuantity;
 }

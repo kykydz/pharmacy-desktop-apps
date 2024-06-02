@@ -1,37 +1,87 @@
 package org.app.projectpharmacy.controller;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import org.app.projectpharmacy.entities.Stock;
+import org.app.projectpharmacy.services.StockService;
+import org.app.projectpharmacy.view.CustomerCreate;
+import org.app.projectpharmacy.view.StockCreate;
+import org.app.projectpharmacy.view.TransactionCreate;
 
-public class MainController {
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.ResourceBundle;
+
+public class MainController implements Initializable {
+    private StockService stockService;
+    @FXML
+    public Button btnStockListNewTransaction;
+    @FXML
+    public Button btnStockListCreateNewUser;
+    public Button btnStockListNewStock;
     @FXML
     private Label welcomeText;
     @FXML
     private TextField inputTextStockListFindStock;
     @FXML
-    private TableColumn tableColStockListMedicationName;
+    private TableColumn<Stock, String> tableColStockListId, tableColStockListMedicationName, tableColStockListStock, tableColStockListPrice, tableColStockListDescription;
     @FXML
-    private TableColumn tableColStockListDescription;
-    @FXML
-    private TableView tableViewStockList;
-    @FXML
-    private Button btnCreateStockListNewStock;
+    private TableView<Stock> tableViewStockList;
     @FXML
     private AnchorPane paneStockList;
     @FXML
-    private TableColumn tableColStockListPrice;
-    @FXML
     private Button btnStockListFindStock;
-    @FXML
-    private TableColumn tableColStockListId;
-    @FXML
-    private TableColumn tableColStockListStock;
-    @FXML
-    private Button btnCreateStockListNewTransaction;
 
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    private Stage primaryStage;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        this._initTableStockList();
+        this._populateTableStockList();
+    }
+
+    private void _initTableStockList(){
+        tableColStockListId.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
+        tableColStockListMedicationName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMedicationName()));
+        tableColStockListStock.setCellValueFactory(cellData -> new SimpleStringProperty(Integer.toString(cellData.getValue().getQuantityAvailable())));
+        tableColStockListPrice.setCellValueFactory(cellData -> new SimpleStringProperty(Integer.toString(cellData.getValue().getPrice())));
+        tableColStockListDescription.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
+    }
+
+    private void _populateTableStockList() {
+        // fetch all data for first load
+        try {
+            stockService = (StockService) new StockService();
+            ObservableList<Stock> stocksObsList = FXCollections.observableArrayList();
+            List<Stock> stocks = stockService.fetchAllRecord();
+            stocksObsList.addAll(stocks);
+            tableViewStockList.setItems(stocksObsList);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void onBtnStockListNewStock(ActionEvent actionEvent) throws IOException {
+        StockCreate stockCreate = new StockCreate();
+        stockCreate.start(primaryStage);
+    }
+
+    public void onBtnStockListNewTransaction(ActionEvent actionEvent) throws IOException {
+        TransactionCreate transactionCreate = new TransactionCreate();
+        transactionCreate.start(primaryStage);
+    }
+
+    public void onBtnStockListCreateNewUser(ActionEvent actionEvent) throws IOException {
+        CustomerCreate customerCreate = new CustomerCreate();
+        customerCreate.start(primaryStage);
     }
 }
