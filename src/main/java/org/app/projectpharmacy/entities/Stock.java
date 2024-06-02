@@ -1,5 +1,8 @@
 package org.app.projectpharmacy.entities;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
 import java.sql.Time;
 import java.sql.Timestamp;
 
@@ -9,9 +12,12 @@ public class Stock {
     private String medicationName;
     private String description;
     private int price;
-    private int quantityAvailable;
+    private Integer quantityAvailable;
     private Timestamp created;
     private Timestamp updated;
+
+    private final IntegerProperty qtyAvailable = new SimpleIntegerProperty();
+
 
     public Stock(String id, String medicationName, String description, int price, int quantityAvailable, Timestamp created, Timestamp updated) {
         this.id = id;
@@ -40,8 +46,8 @@ public class Stock {
         return price;
     }
 
-    public int getQuantityAvailable() {
-        return quantityAvailable;
+    public IntegerProperty getQuantityAvailable() {
+        return qtyAvailable;
     }
 
     public Timestamp getCreated() {

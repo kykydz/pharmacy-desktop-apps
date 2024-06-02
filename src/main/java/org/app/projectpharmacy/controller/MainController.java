@@ -1,5 +1,6 @@
 package org.app.projectpharmacy.controller;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -7,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.app.projectpharmacy.entities.Stock;
@@ -33,7 +35,9 @@ public class MainController implements Initializable {
     @FXML
     private TextField inputTextStockListFindStock;
     @FXML
-    private TableColumn<Stock, String> tableColStockListId, tableColStockListMedicationName, tableColStockListStock, tableColStockListPrice, tableColStockListDescription;
+    private TableColumn<Stock, String> tableColStockListId, tableColStockListMedicationName, tableColStockListPrice, tableColStockListDescription;
+    @FXML
+    private TableColumn<Stock, Integer> tableColStockListStock;
     @FXML
     private TableView<Stock> tableViewStockList;
     @FXML
@@ -52,7 +56,25 @@ public class MainController implements Initializable {
     private void _initTableStockList(){
         tableColStockListId.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
         tableColStockListMedicationName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMedicationName()));
-        tableColStockListStock.setCellValueFactory(cellData -> new SimpleStringProperty(Integer.toString(cellData.getValue().getQuantityAvailable())));
+//        tableColStockListStock.setCellValueFactory(cellData -> new SimpleStringProperty(Integer.toString(cellData.getValue().getQuantityAvailable())));
+//        tableColStockListStock.setCellFactory(TextFieldTableCell.forTableColumn());
+//        tableColStockListStock.setEditable(true);
+//        TableColumn<Stock, Integer> tableColStockListStock = new TableColumn<>("Stock");
+        tableColStockListStock.setCellValueFactory(cellData -> cellData.getValue().);
+
+// Use a custom cell factory for integer editing
+        tableColStockListStock.setCellFactory(col -> {
+            TextFieldTableCell<Stock, Integer> cell = new TextFieldTableCell<>(TextFormatter.integerProperty());
+            cell.setOnEditCommit(event -> {
+                Integer newValue = event.getNewValue();
+                if (newValue != null) {
+                    (event.getRowValue()).setQuantityAvailable(newValue); // Update quantity
+                }
+            });
+            return cell;
+        });
+        tableColStockListStock.setEditable(true);
+
         tableColStockListPrice.setCellValueFactory(cellData -> new SimpleStringProperty(Integer.toString(cellData.getValue().getPrice())));
         tableColStockListDescription.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
     }
