@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="paneStockList" prefHeight="318.0" prefWidth="544.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.projectpharmacy.controller.MainController">
+  <Label fx:id="welcomeText" />
+  <Button fx:id="btnStockListFindStock" layoutX="487.0" layoutY="29.0" onAction="#onHelloButtonClick" text="Find" />
+   <TableView id="table_stock" fx:id="tableViewStockList" layoutX="17.0" layoutY="59.0" prefHeight="200.0" prefWidth="511.0">
+     <columns>
+       <TableColumn id="col_id" fx:id="tableColStockListId" prefWidth="49.0" text="ID" />
+       <TableColumn id="col_med_name" fx:id="tableColStockListMedicationName" prefWidth="162.0" text="Medication Name" />
+         <TableColumn id="col_price" fx:id="tableColStockListPrice" prefWidth="121.0" text="Price" />
+         <TableColumn id="col_stock" fx:id="tableColStockListStock" prefWidth="61.0" text="Stock" />
+         <TableColumn id="col_description" fx:id="tableColStockListDescription" prefWidth="117.0" text="Description" />
+     </columns>
+   </TableView>
+   <Label layoutX="17.0" layoutY="17.0" text="Medication Stock List">
+      <font>
+         <Font size="22.0" />
+      </font>
+   </Label>
+   <Label layoutX="315.0" layoutY="9.0" text="Find Medication" />
+   <Button fx:id="btnCreateStockListNewStock" layoutX="426.0" layoutY="271.0" mnemonicParsing="false" text="Add New Stock" />
+   <Button fx:id="btnCreateStockListNewTransaction" layoutX="16.0" layoutY="271.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="401.0" text="New Transaction" />
+   <TextField fx:id="inputTextStockListFindStock" layoutX="315.0" layoutY="29.0" />
+</AnchorPane>
