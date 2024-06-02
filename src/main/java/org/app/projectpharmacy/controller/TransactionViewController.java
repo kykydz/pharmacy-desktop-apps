@@ -1,5 +1,8 @@
 package org.app.projectpharmacy.controller;
 
+import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+
 public class TransactionViewController {
     @javafx.fxml.FXML
     private AnchorPane trxHistoryPane;

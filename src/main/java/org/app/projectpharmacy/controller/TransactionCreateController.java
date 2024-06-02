@@ -1,5 +1,10 @@
 package org.app.projectpharmacy.controller;
 
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+
 public class TransactionCreateController {
     @javafx.fxml.FXML
     private TextField inputTextMedicationName;
