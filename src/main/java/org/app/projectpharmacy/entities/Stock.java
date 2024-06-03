@@ -11,13 +11,13 @@ public class Stock {
     private String id;
     private String medicationName;
     private String description;
-    private int price;
+    private Integer price;
+
+    private final IntegerProperty priceProperty = new SimpleIntegerProperty();
+
     private Integer quantityAvailable;
     private Timestamp created;
     private Timestamp updated;
-
-    private final IntegerProperty qtyAvailable = new SimpleIntegerProperty();
-
 
     public Stock(String id, String medicationName, String description, int price, int quantityAvailable, Timestamp created, Timestamp updated) {
         this.id = id;
@@ -27,9 +27,16 @@ public class Stock {
         this.quantityAvailable = quantityAvailable;
         this.created = created;
         this.updated = updated;
+
+        // property value
+        this.priceProperty.set(price);
     }
 
+
     // Getters
+    public IntegerProperty getPriceProp() {
+        return priceProperty;
+    }
     public String getId() {
         return id;
     }
@@ -42,12 +49,12 @@ public class Stock {
         return description;
     }
 
-    public int getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public IntegerProperty getQuantityAvailable() {
-        return qtyAvailable;
+    public Integer getQuantityAvailable() {
+        return quantityAvailable;
     }
 
     public Timestamp getCreated() {
