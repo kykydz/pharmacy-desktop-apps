@@ -1,23 +1,18 @@
 package org.app.projectpharmacy.entities;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 
-import java.sql.Time;
 import java.sql.Timestamp;
 
 public class Stock {
 
-    private String id;
+    private final String id;
     private String medicationName;
     private String description;
     private Integer price;
 
-    private final IntegerProperty priceProperty = new SimpleIntegerProperty();
-
     private Integer quantityAvailable;
-    private Timestamp created;
-    private Timestamp updated;
+    private final Timestamp created;
+    private final Timestamp updated;
 
     public Stock(String id, String medicationName, String description, int price, int quantityAvailable, Timestamp created, Timestamp updated) {
         this.id = id;
@@ -27,16 +22,10 @@ public class Stock {
         this.quantityAvailable = quantityAvailable;
         this.created = created;
         this.updated = updated;
-
-        // property value
-        this.priceProperty.set(price);
     }
 
 
     // Getters
-    public IntegerProperty getPriceProp() {
-        return priceProperty;
-    }
     public String getId() {
         return id;
     }
@@ -80,10 +69,5 @@ public class Stock {
 
     public void setQuantityAvailable(int quantityAvailable) {
         this.quantityAvailable = quantityAvailable;
-    }
-
-    // You can add a method to update the updated timestamp if needed
-    public void updateTimestamp() {
-        this.updated = new Timestamp(System.currentTimeMillis());
     }
 }

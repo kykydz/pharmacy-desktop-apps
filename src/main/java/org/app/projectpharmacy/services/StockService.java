@@ -6,18 +6,37 @@ import org.app.projectpharmacy.utils.DatabaseManager;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 public class StockService {
-    private final Connection connection;
     private final StockRepository stockRepository;
 
     public StockService() throws SQLException {
-        this.connection = new DatabaseManager(null, null, null, null).connect();
-        this.stockRepository = new StockRepository(connection);
+        this.stockRepository = new StockRepository();
     }
 
     public List<Stock> fetchAllRecord() throws SQLException {
         return stockRepository.getMany(null);
+    }
+
+    public Stock create(String medicationName, Integer price, Integer stockQuantity, String stockDescription) throws SQLException {
+        Stock stock = new Stock(
+                UUID.randomUUID().toString(),
+                medicationName,
+                stockDescription,
+                price,
+                stockQuantity,
+                Timestamp.valueOf(LocalDateTime.now()),
+                Timestamp.valueOf(LocalDateTime.now())
+        );
+        stockRepository.create(stock);
+        return stock;
+    }
+
+    public List<Stock> findStockByName(String medicationName) throws SQLException {
+        return (List<Stock>) stockRepository.getByMedicationName(medicationName);
     }
 }

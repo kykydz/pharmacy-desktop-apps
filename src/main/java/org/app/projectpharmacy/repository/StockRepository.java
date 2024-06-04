@@ -1,16 +1,14 @@
 package org.app.projectpharmacy.repository;
 
-import org.app.projectpharmacy.entities.Customer;
 import org.app.projectpharmacy.entities.Stock;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
 public class StockRepository extends BaseRepository<Stock> {
     private static final String INSERT_QUERY =
-            "INSERT INTO stock (id, medication_name, description, price, quantity_available, created, updated) VALUES (?, ?, ?, ?, ?, ?)";
+            "INSERT INTO stock (id, medication_name, description, price, quantity_available, created, updated) VALUES" +
+                    " (?, ?, ?, ?, ?, ?, ?)";
 
     private static final String FIND_ALL_QUERY = "SELECT * FROM stock";
 
@@ -21,8 +19,8 @@ public class StockRepository extends BaseRepository<Stock> {
 
     private static final String DELETE_QUERY = "DELETE FROM stock WHERE id = ?";
 
-    public StockRepository(Connection connection) {
-        super(connection);
+    public StockRepository() throws SQLException {
+        super();
     }
 
     @Override
@@ -30,11 +28,18 @@ public class StockRepository extends BaseRepository<Stock> {
         return "stock";
     }
 
-    public void create(Customer customer) throws SQLException {
-        String insertQuery = String.format(INSERT_QUERY,
-                customer.getId(), customer.getName(), customer.getPhoneNumber(), customer.getEmailAddress(),
-                customer.getDescription(), customer.getCreated(), customer.getUpdated());
-        super.create(insertQuery);
+    @Override
+    public void create(Stock stock) throws SQLException {
+        try (PreparedStatement ps = connection.prepareStatement(INSERT_QUERY)) {
+            ps.setString(1, stock.getId());
+            ps.setString(2, stock.getMedicationName());
+            ps.setString(3, stock.getDescription());
+            ps.setInt(4, stock.getPrice());
+            ps.setInt(5, stock.getQuantityAvailable());
+            ps.setTimestamp(6, stock.getCreated());
+            ps.setTimestamp(7, stock.getUpdated());
+            ps.executeUpdate();
+        }
     }
 
     @Override
@@ -43,6 +48,12 @@ public class StockRepository extends BaseRepository<Stock> {
             query = FIND_ALL_QUERY;
         }
         return super.getMany(query, params);
+    }
+
+    public List<Stock> getByMedicationName(String medicationName) throws SQLException {
+        String findQueryByMedicationName = "SELECT * FROM stock WHERE medication_name = ? ";
+        Object[] params = { medicationName };
+        return (List<Stock>) this.getMany(findQueryByMedicationName, params);
     }
 
     @Override

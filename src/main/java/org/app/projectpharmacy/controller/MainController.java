@@ -54,6 +54,8 @@ public class MainController implements Initializable {
     @FXML
     private Button btnStockListFindStock;
 
+    private final ObservableList<Stock> stocksObsList = FXCollections.observableArrayList();
+
     private Stage primaryStage;
 
     @Override
@@ -63,32 +65,36 @@ public class MainController implements Initializable {
     }
 
     private void _initTableStockList(){
-        tableViewStockList.setEditable(true);
-
+        this._setEditableTableStockList(false);
         tableColStockListId.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
-
         tableColStockListMedicationName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMedicationName()));
+        tableColStockListStock.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getQuantityAvailable()));
+        tableColStockListPrice.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getPrice()));
+        tableColStockListDescription.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
+    }
+
+    private void _setEditableTableStockList(Boolean isEditable) {
+        if (!isEditable) {
+            tableViewStockList.setEditable(false);
+            return;
+        }
+        tableViewStockList.setEditable(false);
+
         tableColStockListMedicationName.setCellFactory(TextFieldTableCell.<Stock>forTableColumn());
         tableColStockListMedicationName.setOnEditCommit(
                 t -> t.getTableView().getItems().get(
                         t.getTablePosition().getRow()).setMedicationName(t.getNewValue())
         );
-
-        tableColStockListStock.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getQuantityAvailable()));
         tableColStockListStock.setCellFactory(TextFieldTableCell.<Stock, Number>forTableColumn(new NumberStringConverter()));
         tableColStockListStock.setOnEditCommit(
                 t -> t.getTableView().getItems().get(
                         t.getTablePosition().getRow()).setQuantityAvailable((Integer) t.getNewValue())
         );
-
-        tableColStockListPrice.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getPrice()));
         tableColStockListPrice.setCellFactory(TextFieldTableCell.<Stock, Number>forTableColumn(new NumberStringConverter()));
         tableColStockListPrice.setOnEditCommit(
                 t -> t.getTableView().getItems().get(
                         t.getTablePosition().getRow()).setPrice((Integer) t.getNewValue())
         );
-
-        tableColStockListDescription.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
         tableColStockListDescription.setCellFactory(TextFieldTableCell.<Stock>forTableColumn());
         tableColStockListDescription.setOnEditCommit(
                 t -> t.getTableView().getItems().get(
@@ -100,10 +106,7 @@ public class MainController implements Initializable {
         // fetch all data for first load
         try {
             stockService = (StockService) new StockService();
-            ObservableList<Stock> stocksObsList = FXCollections.observableArrayList();
-            List<Stock> stocks = stockService.fetchAllRecord();
-            stocksObsList.addAll(stocks);
-            tableViewStockList.setItems(stocksObsList);
+            this._clearAndPopulateTableView(null);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -122,5 +125,20 @@ public class MainController implements Initializable {
     public void onBtnStockListCreateNewUser(ActionEvent actionEvent) throws IOException {
         CustomerCreate customerCreate = new CustomerCreate();
         customerCreate.start(primaryStage);
+    }
+
+    public void onBtnStockListFindStock(ActionEvent actionEvent) throws SQLException {
+        String medicationName = inputTextStockListFindStock.getText();
+        List<Stock> stocks = stockService.findStockByName(medicationName);
+        this._clearAndPopulateTableView();
+    }
+
+    private void _clearAndPopulateTableView(List<Stock> stocks) throws SQLException {
+        tableViewStockList.getItems().clear();
+        if (stocks == null || stocks.isEmpty()) {
+            stocks = stockService.fetchAllRecord();
+        }
+        stocksObsList.setAll(stocks);
+        tableViewStockList.setItems(stocksObsList);
     }
 }

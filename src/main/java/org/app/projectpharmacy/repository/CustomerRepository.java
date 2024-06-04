@@ -23,8 +23,8 @@ public class CustomerRepository extends BaseRepository<Customer> {
 
     private static final String DELETE_QUERY = "DELETE FROM customer WHERE id = ?";
 
-    public CustomerRepository(Connection connection) {
-        super(connection);
+    public CustomerRepository() throws SQLException {
+        super();
     }
 
     @Override
@@ -36,7 +36,6 @@ public class CustomerRepository extends BaseRepository<Customer> {
         String insertQuery = String.format(INSERT_QUERY,
                 customer.getId(), customer.getName(), customer.getPhoneNumber(), customer.getEmailAddress(),
                 customer.getDescription(), customer.getCreated(), customer.getUpdated());
-        super.create(insertQuery);
     }
 
     @Override
