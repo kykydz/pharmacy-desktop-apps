@@ -130,7 +130,7 @@ public class MainController implements Initializable {
     public void onBtnStockListFindStock(ActionEvent actionEvent) throws SQLException {
         String medicationName = inputTextStockListFindStock.getText();
         List<Stock> stocks = stockService.findStockByName(medicationName);
-        this._clearAndPopulateTableView();
+        this._clearAndPopulateTableView(stocks);
     }
 
     private void _clearAndPopulateTableView(List<Stock> stocks) throws SQLException {
