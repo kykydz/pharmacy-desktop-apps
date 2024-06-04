@@ -17,6 +17,7 @@ import javafx.util.converter.NumberStringConverter;
 import org.app.projectpharmacy.entities.Stock;
 import org.app.projectpharmacy.services.StockService;
 import org.app.projectpharmacy.view.CustomerCreate;
+import org.app.projectpharmacy.view.CustomerView;
 import org.app.projectpharmacy.view.StockCreate;
 import org.app.projectpharmacy.view.TransactionCreate;
 
@@ -27,6 +28,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
+    public Button btnStockListCustomersView;
     private StockService stockService;
     @FXML
     public Button btnStockListNewTransaction;
@@ -140,5 +142,10 @@ public class MainController implements Initializable {
         }
         stocksObsList.setAll(stocks);
         tableViewStockList.setItems(stocksObsList);
+    }
+
+    public void onBtnStockListCustomersView(ActionEvent actionEvent) throws IOException {
+        CustomerView customerView = new CustomerView();
+        customerView.start(primaryStage);
     }
 }

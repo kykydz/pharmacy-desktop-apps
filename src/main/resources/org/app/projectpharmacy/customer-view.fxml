@@ -8,31 +8,28 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="customerViewPane" prefHeight="306.0" prefWidth="697.0" xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.app.projectpharmacy.controller.CustomerViewController">
-    <TableView id="table_stock" fx:id="tableViewCustomerView" layoutX="17.0" layoutY="59.0" prefHeight="200.0"
-               prefWidth="663.0">
+<AnchorPane fx:id="customerViewPane" prefHeight="312.0" prefWidth="697.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.projectpharmacy.controller.CustomerViewController">
+    <TableView id="table_stock" fx:id="tableViewCustomerView" layoutX="19.0" layoutY="66.0" prefHeight="200.0" prefWidth="663.0">
         <columns>
-            <TableColumn id="col_id" fx:id="tableColCustomerViewId" prefWidth="97.0" text="ID"/>
-            <TableColumn id="col_name" fx:id="tableColCustomerViewName" prefWidth="114.0" text="Name"/>
-            <TableColumn id="col_wa_number" fx:id="tableColCustomerViewWANumber" prefWidth="120.0" text="WA Number"/>
-            <TableColumn id="col_email" fx:id="tableColCustomerViewEmail" prefWidth="62.0" text="Email"/>
-            <TableColumn id="col_description" fx:id="tableColCustomerViewDesc" prefWidth="117.0" text="Description"/>
-            <TableColumn fx:id="tableColCustomerViewCreated" prefWidth="75.0" text="Created"/>
-            <TableColumn fx:id="tableColCustomerViewUpdated" prefWidth="75.0" text="Updated"/>
+            <TableColumn id="col_id" fx:id="tableColCustomerViewId" prefWidth="97.0" text="ID" />
+            <TableColumn id="col_name" fx:id="tableColCustomerViewName" prefWidth="114.0" text="Name" />
+            <TableColumn id="col_wa_number" fx:id="tableColCustomerViewWANumber" prefWidth="120.0" text="WA Number" />
+            <TableColumn id="col_email" fx:id="tableColCustomerViewEmail" prefWidth="62.0" text="Email" />
+            <TableColumn id="col_description" fx:id="tableColCustomerViewDesc" prefWidth="117.0" text="Description" />
+            <TableColumn fx:id="tableColCustomerViewCreated" prefWidth="75.0" text="Created" />
+            <TableColumn fx:id="tableColCustomerViewUpdated" prefWidth="75.0" text="Updated" />
         </columns>
     </TableView>
-    <Label layoutX="17.0" layoutY="17.0" text="Transaction History">
+    <Label layoutX="17.0" layoutY="17.0" text="Customers">
         <font>
-            <Font size="22.0"/>
+            <Font size="22.0" />
         </font>
     </Label>
-    <Button fx:id="btnCustomerViewClose" layoutX="635.0" layoutY="268.0" mnemonicParsing="false" text="Close"/>
-    <TextField fx:id="inputTextCustomerViewFindTrx" layoutX="417.0" layoutY="31.0" prefHeight="26.0" prefWidth="145.0"/>
-    <Button fx:id="btnCustomerViewFindTrx" layoutX="574.0" layoutY="31.0" mnemonicParsing="false"
-            text="Find Transaction"/>
-    <Label layoutX="417.0" layoutY="10.0" text="Find Transaction"/>
-    <Label fx:id="labelCustomerViewFindResultMssg" layoutX="17.0" layoutY="263.0"
-           text="[Transaction Result Placeholder Message]"/>
+    <Button fx:id="btnCustomerViewClose" layoutX="637.0" layoutY="275.0" mnemonicParsing="false" text="Close" />
+    <TextField fx:id="inputTextCustomerViewFind" layoutX="417.0" layoutY="31.0" prefHeight="26.0" prefWidth="145.0" />
+    <Button fx:id="btnCustomerViewFind" layoutX="574.0" layoutY="31.0" mnemonicParsing="false" onAction="#btnCustomerViewFind" text="Find Customer" />
+    <Label layoutX="417.0" layoutY="10.0" text="Customer Name" />
+    <Label fx:id="labelCustomerViewFindResultMssg" layoutX="19.0" layoutY="270.0" text="[Transaction Result Placeholder Message]" />
+   <Button fx:id="btnCustomerViewSelect" layoutX="492.0" layoutY="276.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="132.0" text="Select" onAction="#btnCustomerViewSelect"/>
+   <Button fx:id="btnCustomerViewCreateNew" layoutX="341.0" layoutY="275.0" mnemonicParsing="false" onAction="#onBtnCustomerViewCreateNew" prefHeight="26.0" prefWidth="132.0" text="Create New" />
 </AnchorPane>

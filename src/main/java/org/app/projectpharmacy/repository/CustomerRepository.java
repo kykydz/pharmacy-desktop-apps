@@ -1,6 +1,7 @@
 package org.app.projectpharmacy.repository;
 
 import org.app.projectpharmacy.entities.Customer;
+import org.app.projectpharmacy.entities.Stock;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +13,7 @@ public class CustomerRepository extends BaseRepository<Customer> {
 
 
     private static final String INSERT_QUERY =
-            "INSERT INTO customer (id, name, phone_number, email_address, description, created, updated) VALUES (?, ?, ?, ?, ?, ?)";
+            "INSERT INTO customer (id, name, phone_number, email_address, description, created, updated) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     private static final String FIND_ALL_QUERY = "SELECT * FROM customer";
 
@@ -32,10 +33,19 @@ public class CustomerRepository extends BaseRepository<Customer> {
         return "customer";
     }
     
+    @Override
     public void create(Customer customer) throws SQLException {
-        String insertQuery = String.format(INSERT_QUERY,
-                customer.getId(), customer.getName(), customer.getPhoneNumber(), customer.getEmailAddress(),
-                customer.getDescription(), customer.getCreated(), customer.getUpdated());
+        try (PreparedStatement ps = connection.prepareStatement(INSERT_QUERY)) {
+            ps.setString(1, customer.getId());
+            ps.setString(2, customer.getName());
+            ps.setString(3, customer.getPhoneNumber());
+            ps.setString(4, customer.getPhoneNumber());
+            ps.setString(5, customer.getEmailAddress());
+            ps.setString(5, customer.getDescription());
+            ps.setTimestamp(6, customer.getCreated());
+            ps.setTimestamp(7, customer.getUpdated());
+            ps.executeUpdate();
+        }
     }
 
     @Override
@@ -44,6 +54,12 @@ public class CustomerRepository extends BaseRepository<Customer> {
             query = FIND_ALL_QUERY;
         }
         return super.getMany(query, params);
+    }
+
+    public List<Customer> getByName(String name) throws SQLException {
+        String findQueryByName = "SELECT * FROM customer WHERE name like ? ";
+        Object[] params = { name };
+        return this.getMany(findQueryByName, params);
     }
 
     @Override

@@ -53,7 +53,7 @@ public class StockRepository extends BaseRepository<Stock> {
     public List<Stock> getByMedicationName(String medicationName) throws SQLException {
         String findQueryByMedicationName = "SELECT * FROM stock WHERE medication_name = ? ";
         Object[] params = { medicationName };
-        return (List<Stock>) this.getMany(findQueryByMedicationName, params);
+        return this.getMany(findQueryByMedicationName, params);
     }
 
     @Override

@@ -21,6 +21,6 @@ public class StockCreate extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/app/projectpharmacy/stock-create.fxml"));
 
         ScreenLoader screenLoader = new ScreenLoader();
-        screenLoader.LoadChildWindow(fxmlLoader, primaryStage);
+        screenLoader.LoadChildWindow(fxmlLoader, primaryStage, null);
     }
 }

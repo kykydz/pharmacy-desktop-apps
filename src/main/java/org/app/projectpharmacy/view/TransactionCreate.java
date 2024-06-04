@@ -21,6 +21,6 @@ public class TransactionCreate extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/app/projectpharmacy/transaction-create.fxml"));
 
         ScreenLoader screenLoader = new ScreenLoader();
-        screenLoader.LoadChildWindow(fxmlLoader, primaryStage);
+        screenLoader.LoadChildWindow(fxmlLoader, primaryStage, null);
     }
 }

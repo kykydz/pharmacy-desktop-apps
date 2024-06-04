@@ -1,7 +1,15 @@
 package org.app.projectpharmacy.controller;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import org.app.projectpharmacy.view.CustomerView;
+
+import java.io.IOException;
+import java.util.Objects;
 
 public class TransactionCreateController {
     @javafx.fxml.FXML
@@ -30,4 +38,10 @@ public class TransactionCreateController {
     private TextField textInputTrxCreateCustomerId;
     @javafx.fxml.FXML
     private TableColumn tableColTrxCreateItemQuantity;
+
+    public void btnTrxCreateFindCustomer(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        CustomerView customerView = new CustomerView();
+        customerView.start(stage);
+    }
 }

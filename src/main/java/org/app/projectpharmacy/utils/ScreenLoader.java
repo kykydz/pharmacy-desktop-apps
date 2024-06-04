@@ -33,7 +33,7 @@ public class ScreenLoader {
         stage.show();
     }
 
-    public void LoadChildWindow (FXMLLoader fxmlLoader, Stage primaryStage) throws IOException {
+    public <T> void LoadChildWindow (FXMLLoader fxmlLoader, Stage primaryStage, T information) throws IOException {
         Scene scene = new Scene(fxmlLoader.load());
 
         // Get the scene's root node
@@ -49,6 +49,9 @@ public class ScreenLoader {
 
         // Adjust as child stage
         Stage childStage = new Stage();
+
+        childStage.setUserData(information);
+
         childStage.initOwner(primaryStage);
         childStage.initModality(Modality.APPLICATION_MODAL);
         childStage.setWidth(prefWidth);
