@@ -29,7 +29,7 @@
     <TextField fx:id="inputTextCustomerViewFind" layoutX="417.0" layoutY="31.0" prefHeight="26.0" prefWidth="145.0" />
     <Button fx:id="btnCustomerViewFind" layoutX="574.0" layoutY="31.0" mnemonicParsing="false" onAction="#btnCustomerViewFind" text="Find Customer" />
     <Label layoutX="417.0" layoutY="10.0" text="Customer Name" />
-    <Label fx:id="labelCustomerViewFindResultMssg" layoutX="19.0" layoutY="270.0" text="[Transaction Result Placeholder Message]" />
-   <Button fx:id="btnCustomerViewSelect" layoutX="492.0" layoutY="276.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="132.0" text="Select" onAction="#btnCustomerViewSelect"/>
+   <Button fx:id="btnCustomerViewSelect" layoutX="492.0" layoutY="276.0" mnemonicParsing="false" onAction="#btnCustomerViewSelect" prefHeight="26.0" prefWidth="132.0" text="Select" />
    <Button fx:id="btnCustomerViewCreateNew" layoutX="341.0" layoutY="275.0" mnemonicParsing="false" onAction="#onBtnCustomerViewCreateNew" prefHeight="26.0" prefWidth="132.0" text="Create New" />
+   <TextField fx:id="inputTextCustomerViewCustId" editable="false" layoutX="19.0" layoutY="275.0" prefHeight="26.0" prefWidth="294.0" />
 </AnchorPane>

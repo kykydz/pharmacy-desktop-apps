@@ -31,6 +31,7 @@ public class CustomerViewController implements Initializable {
     public Button btnCustomerViewFind;
     public Button btnCustomerViewSelect;
     public Button btnCustomerViewCreateNew;
+    public TextField inputTextCustomerViewCustId;
     private CustomerService customerService;
     @javafx.fxml.FXML
     private Button btnCustomerViewFindTrx;
@@ -116,7 +117,7 @@ public class CustomerViewController implements Initializable {
 
     public void btnCustomerViewSelect(ActionEvent actionEvent) {
         Customer selectedCustomer = (Customer) tableViewCustomerView.getSelectionModel().getSelectedItem();
-        labelCustomerViewFindResultMssg.setText(selectedCustomer.getId());
+        inputTextCustomerViewCustId.setText(selectedCustomer.getId());
         // TODO: add data transfer to parent controller who call this stage
     }
 }

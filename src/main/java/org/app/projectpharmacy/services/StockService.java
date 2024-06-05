@@ -37,6 +37,10 @@ public class StockService {
     }
 
     public List<Stock> findStockByName(String medicationName) throws SQLException {
-        return (List<Stock>) stockRepository.getByMedicationName(medicationName);
+        return stockRepository.getByMedicationName(medicationName);
+    }
+
+    public Stock findStockById(String stockId) throws SQLException {
+        return stockRepository.getById(stockId);
     }
 }

@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="trxCreatePane" prefHeight="409.0" prefWidth="544.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.projectpharmacy.controller.TransactionCreateController">
-    <TableView id="table_stock" fx:id="tableViewTrxCreateItems" layoutX="18.0" layoutY="159.0" prefHeight="200.0" prefWidth="511.0">
+<AnchorPane fx:id="trxCreatePane" prefHeight="554.0" prefWidth="544.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.projectpharmacy.controller.TransactionCreateController">
+    <TableView id="table_stock" fx:id="tableViewTrxCreateItems" layoutX="18.0" layoutY="303.0" prefHeight="200.0" prefWidth="511.0">
         <columns>
             <TableColumn id="col_id" fx:id="tableColTrxCreateItemId" prefWidth="73.0" text="ID" />
-            <TableColumn id="col_med_name" fx:id="tableColTrxCreateStockId" prefWidth="138.0" text="Stock ID" />
-            <TableColumn id="col_price" fx:id="tableColTrxCreateItemQuantity" prefWidth="70.0" text="Quantity" />
-            <TableColumn id="col_stock" fx:id="tableColTrxCreateItemPrice" prefWidth="112.0" text="Price" />
-            <TableColumn id="col_description" fx:id="tableColTrxCreateItemSubTotalPrice" prefWidth="117.0" text="Sub Total Price" />
+            <TableColumn id="col_stock_id" fx:id="tableColTrxCreateStockName" prefWidth="138.0" text="Medication Name" />
+            <TableColumn id="col_qty" fx:id="tableColTrxCreateItemQuantity" prefWidth="70.0" text="Quantity" />
+            <TableColumn id="col_stock_price" fx:id="tableColTrxCreateItemPrice" prefWidth="112.0" text="Price" />
+            <TableColumn id="col_description" fx:id="tableColTrxCreateItemSubTotalPrice" prefWidth="117.0" text="Sub Total" />
         </columns>
     </TableView>
     <Label layoutX="185.0" layoutY="14.0" text="Transaction Create">
@@ -23,29 +26,44 @@
             <Font size="22.0" />
         </font>
     </Label>
-    <Button fx:id="btnTrxCreateClose" layoutX="480.0" layoutY="371.0" mnemonicParsing="false" text="Close" />
-   <Label layoutX="18.0" layoutY="370.0" prefHeight="26.0" prefWidth="57.0" text="Total">
+    <Button fx:id="btnTrxCreateClose" layoutX="480.0" layoutY="515.0" mnemonicParsing="false" text="Close" />
+   <Label layoutX="18.0" layoutY="514.0" prefHeight="26.0" prefWidth="57.0" text="Total">
       <font>
          <Font size="22.0" />
       </font>
    </Label>
-   <TextField fx:id="textInputTrxCreateCustomerName" layoutX="117.0" layoutY="94.0" prefHeight="26.0" prefWidth="170.0" />
+   <TextField fx:id="textInputTrxCreateCustomerName" editable="false" layoutX="122.0" layoutY="93.0" prefHeight="26.0" prefWidth="170.0" promptText="Customer Name" />
    <Label layoutX="17.0" layoutY="93.0" prefHeight="28.0" prefWidth="100.0" text="Customer Name">
       <font>
          <Font size="12.0" />
       </font>
    </Label>
-   <TextField fx:id="textInputTrxCreateCustomerId" layoutX="117.0" layoutY="57.0" prefHeight="26.0" prefWidth="170.0" />
+   <TextField fx:id="textInputTrxCreateCustomerId" layoutX="122.0" layoutY="56.0" prefHeight="26.0" prefWidth="170.0" promptText="Customer ID" />
    <Label layoutX="17.0" layoutY="56.0" prefHeight="28.0" prefWidth="100.0" text="Customer ID">
       <font>
          <Font size="12.0" />
       </font>
    </Label>
-   <Button fx:id="btnTrxCreateFindCustomer" layoutX="304.0" layoutY="57.0" mnemonicParsing="false" onAction="#btnTrxCreateFindCustomer" text="Find Customer" />
-   <Button fx:id="btnTrxCreateClose2" layoutX="338.0" layoutY="371.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="123.0" text="Create" />
-   <Label layoutX="17.0" layoutY="131.0" prefHeight="28.0" prefWidth="100.0" text="List Items">
+   <Button fx:id="btnTrxCreateFindCustomer" layoutX="461.0" layoutY="56.0" mnemonicParsing="false" onAction="#btnTrxCreateFindCustomer" prefHeight="62.0" prefWidth="69.0" text="Find Customer" />
+   <Button fx:id="btnTrxCreateSaveRecord" layoutX="338.0" layoutY="515.0" mnemonicParsing="false" onAction="#btnTrxCreateSaveRecord" prefHeight="26.0" prefWidth="123.0" text="Create" />
+   <Label layoutX="17.0" layoutY="275.0" prefHeight="28.0" prefWidth="100.0" text="List Items">
       <font>
          <Font size="12.0" />
       </font>
    </Label>
+   <Label layoutX="17.0" layoutY="127.0" prefHeight="28.0" prefWidth="100.0" text="Select Stock Name">
+      <font>
+         <Font size="12.0" />
+      </font>
+   </Label>
+   <ComboBox fx:id="comboTrxCreateStockList" layoutX="141.0" layoutY="128.0" prefHeight="26.0" prefWidth="151.0" />
+   <Button fx:id="btnTrxCreateInputStock" layoutX="143.0" layoutY="204.0" mnemonicParsing="false" onAction="#btnTrxCreateInputToTableview" prefHeight="26.0" prefWidth="151.0" text="Input" />
+   <TextArea fx:id="textAreaTrxCreateStockDetail" editable="false" layoutX="302.0" layoutY="128.0" prefHeight="160.0" prefWidth="227.0" promptText="[ Stock Detail ]" />
+   <TextArea layoutX="302.0" layoutY="57.0" prefHeight="62.0" prefWidth="151.0" />
+   <Label layoutX="17.0" layoutY="167.0" prefHeight="28.0" prefWidth="123.0" text="Select Stock Quantity">
+      <font>
+         <Font size="12.0" />
+      </font>
+   </Label>
+   <Spinner fx:id="spinnerTrxCreateStock" layoutX="141.0" layoutY="168.0" prefHeight="26.0" prefWidth="151.0" />
 </AnchorPane>

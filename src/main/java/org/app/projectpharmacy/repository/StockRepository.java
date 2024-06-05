@@ -50,6 +50,10 @@ public class StockRepository extends BaseRepository<Stock> {
         return super.getMany(query, params);
     }
 
+    public Stock getById(String id) throws SQLException {
+        return super.get(id, FIND_BY_ID_QUERY);
+    }
+
     public List<Stock> getByMedicationName(String medicationName) throws SQLException {
         String findQueryByMedicationName = "SELECT * FROM stock WHERE medication_name = ? ";
         Object[] params = { medicationName };
