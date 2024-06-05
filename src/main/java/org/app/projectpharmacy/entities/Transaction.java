@@ -60,6 +60,10 @@ public class Transaction {
         this.transactionItems = transactionItems;
     }
 
+    public List<TransactionItem> getTransactionItems() {
+        return this.transactionItems;
+    }
+
     // Additional methods (optional)
     // You can add methods for specific functionalities related to Transaction objects
 

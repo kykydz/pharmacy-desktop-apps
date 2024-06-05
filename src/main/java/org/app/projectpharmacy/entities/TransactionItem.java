@@ -9,10 +9,13 @@ public class TransactionItem {
     private String transactionId;
     private String stockId;
 
-    private String stockName;
     private Integer quantity;
     private Timestamp created;
     private Timestamp updated;
+
+    private Stock stockData;
+
+    private Double subTotal;
 
     public TransactionItem(String id, String transactionId, String stockId, Integer quantity, Timestamp created, Timestamp updated) {
         this.id = id;
@@ -70,12 +73,20 @@ public class TransactionItem {
         this.updated = updated;
     }
 
-    public void setStockName(String stockName) {
-        this.stockName = stockName;
+    public void setStockData(Stock stockData) {
+        this.stockData = stockData;
     }
 
-    public String getStockName() {
-        return this.stockName;
+    public Stock getStockData() {
+        return this.stockData;
+    }
+
+    public void setSubTotal(double subTotal) {
+        this.subTotal = subTotal;
+    }
+
+    public Double getSubTotal() {
+        return this.subTotal;
     }
 
     // Additional methods (optional)

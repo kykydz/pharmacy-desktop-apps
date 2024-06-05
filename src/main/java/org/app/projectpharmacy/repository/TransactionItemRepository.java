@@ -11,7 +11,8 @@ import java.util.List;
 public class TransactionItemRepository extends BaseRepository<TransactionItem> {
 
     private static final String INSERT_QUERY =
-            "INSERT INTO transaction (id, transaction_id, stock_id, quantity, created, updated) VALUES (?, ?, ?, ?, ?, ?)";
+            "INSERT INTO transaction_item (id, transaction_id, stock_id, quantity, created, updated) VALUES (?, ?, ?," +
+                    " ?, ?, ?)";
 
     private static final String FIND_ALL_QUERY = "SELECT * FROM transaction_item";
 

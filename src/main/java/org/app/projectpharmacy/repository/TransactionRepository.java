@@ -31,8 +31,8 @@ public class TransactionRepository extends BaseRepository<Transaction> {
             ps.setString(2, transaction.getCustomerId());
             ps.setDouble(3, transaction.getTotalPrice());
             ps.setString(4, transaction.getMetaData());
-            ps.setTimestamp(6, transaction.getCreated());
-            ps.setTimestamp(7, transaction.getUpdated());
+            ps.setTimestamp(5, transaction.getCreated());
+            ps.setTimestamp(6, transaction.getUpdated());
             ps.executeUpdate();
         }
     }

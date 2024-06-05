@@ -1,21 +1,19 @@
 package org.app.projectpharmacy.controller;
 
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.app.projectpharmacy.entities.Customer;
 import org.app.projectpharmacy.entities.Stock;
 import org.app.projectpharmacy.entities.Transaction;
 import org.app.projectpharmacy.entities.TransactionItem;
-import org.app.projectpharmacy.services.CustomerService;
 import org.app.projectpharmacy.services.StockService;
 import org.app.projectpharmacy.services.TransactionService;
 import org.app.projectpharmacy.view.CustomerView;
@@ -23,18 +21,21 @@ import org.app.projectpharmacy.view.CustomerView;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
 public class TransactionCreateController implements Initializable {
     public Button btnTrxCreateSaveRecord;
     public TableColumn<TransactionItem, String> tableColTrxCreateStockName;
-    public TableColumn<TransactionItem, Integer> tableColTrxCreateItemPrice;
+    public TableColumn<TransactionItem, Number> tableColTrxCreateItemPrice;
     public ComboBox<Stock> comboTrxCreateStockList;
     public TextArea textAreaTrxCreateStockDetail;
     public Spinner<Integer> spinnerTrxCreateStock;
+    public TextField textInputTrxCreateTotalPrice;
     @javafx.fxml.FXML
     private AnchorPane trxCreatePane;
     @javafx.fxml.FXML
@@ -42,13 +43,13 @@ public class TransactionCreateController implements Initializable {
     @javafx.fxml.FXML
     private TableColumn<TransactionItem, String> tableColTrxCreateStockId;
     @javafx.fxml.FXML
-    private TableColumn<TransactionItem, Integer> tableColTrxCreateItemQuantity;
+    private TableColumn<TransactionItem, Number> tableColTrxCreateItemQuantity;
     @javafx.fxml.FXML
-    private TableView tableViewTrxCreateItems;
+    private TableView<TransactionItem> tableViewTrxCreateItems;
     @javafx.fxml.FXML
     private TableColumn<TransactionItem, String> tableColTrxCreateItemId;
     @javafx.fxml.FXML
-    private TableColumn<TransactionItem, Integer> tableColTrxCreateItemSubTotalPrice;
+    private TableColumn<TransactionItem, Number> tableColTrxCreateItemSubTotalPrice;
     @javafx.fxml.FXML
     private TextField textInputTrxCreateCustomerName;
     @javafx.fxml.FXML
@@ -60,8 +61,10 @@ public class TransactionCreateController implements Initializable {
     @javafx.fxml.FXML
     private TextField textInputTrxCreateCustomerId;
 
-    private final ObservableList<Stock> initialStockObsList = FXCollections.observableArrayList();
+    private final ObservableList<Stock> comboStockObsList = FXCollections.observableArrayList();
     private Stock currentSelectedComboItem;
+
+    private double totalPrice = 0;
 
     private final ObservableList<TransactionItem> transactionItemObsList = FXCollections.observableArrayList();
     private TransactionService transactionService;
@@ -75,62 +78,46 @@ public class TransactionCreateController implements Initializable {
         customerView.start(stage);
     }
 
-    public void btnTrxCreateSaveRecord(ActionEvent actionEvent) {
-
+    public void btnTrxCreateSaveRecord(ActionEvent actionEvent) throws SQLException {
+        String customerId = textInputTrxCreateCustomerId.getText();
+        // get records of transactionItems from tableview
+        List<TransactionItem> transactionItems = tableViewTrxCreateItems.getItems();
+        transactionService.create(customerId, (int) totalPrice, "", transactionItems);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             stockService = new StockService();
+            transactionService = new TransactionService();
             this._populateComboMedList();
+            this._initTableView();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
     // TODO: complete this method
-    private void populateTableView(TransactionItem transactionItem) {
-        transactionItemList.add(transactionItem);
-        ObservableList<TransactionItem> transactionItemsObsList = FXCollections.observableArrayList();
-
-        // get stock name from stock_id in transactionItem
-
-        transactionItemsObsList.setAll(transactionItemList);
-
+    private void _initTableView() {
         tableColTrxCreateItemId.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
         tableColTrxCreateStockName.setCellValueFactory(cellData -> {
-            try {
-                Stock stock = stockService.findStockById(cellData.getValue().getStockId());
-                return new SimpleStringProperty(stock.getMedicationName());
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+            String name = cellData.getValue().getStockData().getMedicationName();
+            return new SimpleStringProperty(name);
         });
-    }
-
-    // TODO: complete this method
-    private void _populateTableStockList() {
-        // fetch all data for first load
-        try {
-            transactionService = new TransactionService();
-            this._clearAndPopulateTableView(null);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    // TODO: complete this method
-    private void _clearAndPopulateTableView(List<TransactionItem> transactionItems) throws SQLException {
-        tableViewTrxCreateItems.getItems().clear();
+        tableColTrxCreateItemQuantity.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getQuantity()));
+        tableColTrxCreateItemPrice.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getStockData().getPrice()));
+        tableColTrxCreateItemSubTotalPrice.setCellValueFactory(cellData -> {
+            int qty = cellData.getValue().getQuantity();
+            double price = cellData.getValue().getStockData().getPrice();
+            double subTotal = qty * price;
+            return new SimpleDoubleProperty(subTotal);
+        });
     }
 
     private void _populateComboMedList() throws SQLException {
         List<Stock> initialStocks = stockService.fetchAllRecord();
-        initialStockObsList.addAll(initialStocks);
-
-        comboTrxCreateStockList.setItems(initialStockObsList);
-
+        comboStockObsList.addAll(initialStocks);
+        comboTrxCreateStockList.setItems(comboStockObsList);
         comboTrxCreateStockList.setCellFactory(param -> new ListCell<Stock>() {
             @Override
             protected void updateItem(Stock item, boolean empty) {
@@ -170,6 +157,29 @@ public class TransactionCreateController implements Initializable {
 
     public void btnTrxCreateInputToTableview(ActionEvent actionEvent) {
         // TODO: complete this method to input to table view by call _populateTableStockList
+        String transactionId = UUID.randomUUID().toString();
+        String transactionItemId = UUID.randomUUID().toString();
+        Integer quantity = spinnerTrxCreateStock.getValue();
+        String stockId = currentSelectedComboItem.getId();
+
+        TransactionItem transactionItem = new TransactionItem(
+                transactionItemId,
+                transactionId,
+                stockId,
+                quantity,
+                Timestamp.valueOf(LocalDateTime.now()),
+                Timestamp.valueOf(LocalDateTime.now())
+        );
+        transactionItem.setStockData(currentSelectedComboItem);
+        transactionItemObsList.add(transactionItem);
+
+        double newTotalPrice = 0.0;
+        for (TransactionItem item : transactionItemObsList) {
+            newTotalPrice += item.getQuantity() * item.getStockData().getPrice();
+        }
+        totalPrice = newTotalPrice;
+        textInputTrxCreateTotalPrice.setText(String.valueOf(totalPrice));
+        tableViewTrxCreateItems.setItems(transactionItemObsList);
     }
 
     private void _setDetailStockTextArea(Stock stock) {
@@ -180,5 +190,8 @@ public class TransactionCreateController implements Initializable {
         String qty = STR."Qty: \{stock.getQuantityAvailable()} \n";
         String text = id + name + description + price + qty;
         textAreaTrxCreateStockDetail.setText(text);
+    }
+
+    public void onTextInputTrxCreateTotalPrice(ActionEvent actionEvent) {
     }
 }
