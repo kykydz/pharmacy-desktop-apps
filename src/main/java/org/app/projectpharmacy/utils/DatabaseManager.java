@@ -13,8 +13,8 @@ public class DatabaseManager {
 
     public DatabaseManager(String host, String username, String password, String port) {
         this.host = host != null ? host : "jdbc:postgresql://localhost:5432/pharmacy";
-        this.username = username != null ? username : "postgres";
-        this.password = password != null ? password : "qwer1234";
+        this.username = username != null ? username : "kiki";
+        this.password = password != null ? password : "";
         this.port = port;
     }
 

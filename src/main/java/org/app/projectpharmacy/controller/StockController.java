@@ -5,10 +5,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import org.app.projectpharmacy.entities.Stock;
 import org.app.projectpharmacy.services.StockService;
 
@@ -53,5 +55,13 @@ public class StockController implements Initializable {
         String stockDescription = inputTextAreaNewStockDescription.getText();
 
         stockService.create(medicationName, price, stockQuantity, stockDescription);
+
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        stage.close();
+    }
+
+    public void btnNewStockCancel(ActionEvent actionEvent) {
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        stage.close();
     }
 }

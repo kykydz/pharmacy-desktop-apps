@@ -25,7 +25,7 @@
             <Font size="22.0" />
         </font>
     </Label>
-    <Button fx:id="btnCustomerViewClose" layoutX="637.0" layoutY="275.0" mnemonicParsing="false" text="Close" />
+    <Button fx:id="btnCustomerViewClose" layoutX="637.0" layoutY="275.0" mnemonicParsing="false" text="Close" onAction="#btnCustomerViewClose"/>
     <TextField fx:id="inputTextCustomerViewFind" layoutX="417.0" layoutY="31.0" prefHeight="26.0" prefWidth="145.0" />
     <Button fx:id="btnCustomerViewFind" layoutX="574.0" layoutY="31.0" mnemonicParsing="false" onAction="#btnCustomerViewFind" text="Find Customer" />
     <Label layoutX="417.0" layoutY="10.0" text="Customer Name" />

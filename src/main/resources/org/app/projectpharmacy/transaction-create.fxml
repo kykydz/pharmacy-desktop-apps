@@ -26,7 +26,7 @@
             <Font size="22.0" />
         </font>
     </Label>
-    <Button fx:id="btnTrxCreateClose" layoutX="480.0" layoutY="515.0" mnemonicParsing="false" text="Close" />
+    <Button fx:id="btnTrxCreateClose" layoutX="480.0" layoutY="515.0" mnemonicParsing="false" text="Close" onAction="#btnTrxCreateClose"/>
    <Label layoutX="18.0" layoutY="514.0" prefHeight="26.0" prefWidth="57.0" text="Total">
       <font>
          <Font size="22.0" />
@@ -38,7 +38,7 @@
          <Font size="12.0" />
       </font>
    </Label>
-   <TextField fx:id="textInputTrxCreateCustomerId" layoutX="122.0" layoutY="56.0" prefHeight="26.0" prefWidth="170.0" promptText="Customer ID" />
+   <TextField fx:id="textInputTrxCreateCustomerId" editable="false" layoutX="122.0" layoutY="56.0" prefHeight="26.0" prefWidth="170.0" promptText="Customer ID" />
    <Label layoutX="17.0" layoutY="56.0" prefHeight="28.0" prefWidth="100.0" text="Customer ID">
       <font>
          <Font size="12.0" />
@@ -59,7 +59,7 @@
    <ComboBox fx:id="comboTrxCreateStockList" layoutX="141.0" layoutY="128.0" prefHeight="26.0" prefWidth="151.0" />
    <Button fx:id="btnTrxCreateInputStock" layoutX="143.0" layoutY="204.0" mnemonicParsing="false" onAction="#btnTrxCreateInputToTableview" prefHeight="26.0" prefWidth="151.0" text="Input" />
    <TextArea fx:id="textAreaTrxCreateStockDetail" editable="false" layoutX="302.0" layoutY="128.0" prefHeight="160.0" prefWidth="227.0" promptText="[ Stock Detail ]" />
-   <TextArea fx:id="textAreaTrxCreateCustomerDetail" layoutX="302.0" layoutY="57.0" prefHeight="62.0" prefWidth="151.0" />
+   <TextArea fx:id="textAreaTrxCreateCustomerDetail" editable="false" layoutX="302.0" layoutY="57.0" prefHeight="62.0" prefWidth="151.0" />
    <Label layoutX="17.0" layoutY="167.0" prefHeight="28.0" prefWidth="123.0" text="Select Stock Quantity">
       <font>
          <Font size="12.0" />

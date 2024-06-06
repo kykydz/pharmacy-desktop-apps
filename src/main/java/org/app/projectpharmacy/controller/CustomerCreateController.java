@@ -2,10 +2,12 @@ package org.app.projectpharmacy.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import org.app.projectpharmacy.services.CustomerService;
 import org.app.projectpharmacy.services.StockService;
 
@@ -47,5 +49,13 @@ public class CustomerCreateController implements Initializable {
         String email = inputTextCreateCustomerEmail.getText();
         String description = inputTextAreaCreateCustomerDescription.getText();
         customerService.create(name, phoneNumber, email, description);
+
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        stage.close();
+    }
+
+    public void btnCreateCustomerCancel(ActionEvent actionEvent) {
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        stage.close();
     }
 }

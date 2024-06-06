@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -65,6 +66,11 @@ public class TransactionCreateController implements Initializable {
     private Button btnTrxCreateClose2;
     @javafx.fxml.FXML
     private TextField textInputTrxCreateCustomerId;
+
+    public void btnTrxCreateClose(ActionEvent actionEvent) {
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        stage.close();
+    }
 
     public interface DataCallback {
         void receiveData(Customer customer);

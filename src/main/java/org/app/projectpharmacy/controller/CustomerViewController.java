@@ -110,8 +110,8 @@ public class CustomerViewController implements Initializable {
 
     public void btnCustomerViewFind(ActionEvent actionEvent) throws SQLException {
         String name = inputTextCustomerViewFind.getText();
-        List<Customer> stocks = customerService.findCustomerByName(name);
-        this._clearAndPopulateTableView(stocks);
+        List<Customer> customers = customerService.findCustomerByName(name);
+        this._clearAndPopulateTableView(customers);
     }
 
     public void onBtnCustomerViewCreateNew(ActionEvent actionEvent) throws IOException {
@@ -141,5 +141,10 @@ public class CustomerViewController implements Initializable {
         if (stage != null) {
             stage.close();
         }
+    }
+
+    public void btnCustomerViewClose(ActionEvent actionEvent) {
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        stage.close();
     }
 }
