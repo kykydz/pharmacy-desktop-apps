@@ -46,7 +46,7 @@ public class TransactionRepository extends BaseRepository<Transaction> {
     }
 
     public List<Transaction> getByCustomerId(String customerId) throws SQLException {
-        String findQueryByName = "SELECT * FROM customer WHERE customer_id = ? ";
+        String findQueryByName = "SELECT * FROM transaction WHERE customer_id like ? ";
         Object[] params = { customerId };
         return this.getMany(findQueryByName, params);
     }

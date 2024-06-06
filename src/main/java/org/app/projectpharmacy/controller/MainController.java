@@ -7,15 +7,20 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.converter.NumberStringConverter;
 import org.app.projectpharmacy.entities.Stock;
 import org.app.projectpharmacy.services.StockService;
+import org.app.projectpharmacy.utils.ScreenLoader;
 import org.app.projectpharmacy.view.CustomerCreate;
 import org.app.projectpharmacy.view.CustomerView;
 import org.app.projectpharmacy.view.StockCreate;
@@ -29,6 +34,7 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
     public Button btnStockListCustomersView;
+    public Button btnStockListTransactionList;
     private StockService stockService;
     @FXML
     public Button btnStockListNewTransaction;
@@ -147,5 +153,17 @@ public class MainController implements Initializable {
     public void onBtnStockListCustomersView(ActionEvent actionEvent) throws IOException {
         CustomerView customerView = new CustomerView();
         customerView.start(primaryStage);
+    }
+
+    public void btnStockListTransactionList(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/app/projectpharmacy/transaction-view.fxml"));
+        Parent childRoot = loader.load();
+
+        Stage childStage = new Stage();
+        Scene childScene = new Scene(childRoot);
+        new ScreenLoader().setDefaultChildWindowSize(childScene, childStage);
+        childStage.setScene(childScene);
+        childStage.initModality(Modality.APPLICATION_MODAL);
+        childStage.showAndWait();
     }
 }

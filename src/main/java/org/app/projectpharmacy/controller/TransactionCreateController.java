@@ -117,6 +117,9 @@ public class TransactionCreateController implements Initializable {
         // get records of transactionItems from tableview
         List<TransactionItem> transactionItems = tableViewTrxCreateItems.getItems();
         transactionService.create(customerId, (int) totalPrice, "", transactionItems);
+
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        stage.close();
     }
 
     @Override

@@ -30,4 +30,5 @@
    <Button fx:id="btnStockListNewTransaction" layoutX="275.0" layoutY="271.0" mnemonicParsing="false" onAction="#onBtnStockListNewTransaction" prefHeight="26.0" prefWidth="142.0" text="New Transaction" />
    <TextField fx:id="inputTextStockListFindStock" layoutX="315.0" layoutY="29.0" />
    <Button fx:id="btnStockListCustomersView" layoutX="151.0" layoutY="271.0" mnemonicParsing="false" onAction="#onBtnStockListCustomersView" prefHeight="26.0" prefWidth="114.0" text="Customers" />
+   <Button fx:id="btnStockListTransactionList" layoutX="17.0" layoutY="271.0" mnemonicParsing="false" onAction="#btnStockListTransactionList" prefHeight="26.0" prefWidth="114.0" text="Transaction List" />
 </AnchorPane>
