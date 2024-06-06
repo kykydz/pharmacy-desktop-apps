@@ -4,6 +4,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -48,7 +49,7 @@ public class CustomerViewController implements Initializable {
     @javafx.fxml.FXML
     private TableColumn<Customer, String> tableColCustomerViewDesc;
     @javafx.fxml.FXML
-    private TableView tableViewCustomerView;
+    private TableView<Customer> tableViewCustomerView;
     @javafx.fxml.FXML
     private TableColumn<Customer, String> tableColCustomerViewName;
     @javafx.fxml.FXML
@@ -59,6 +60,10 @@ public class CustomerViewController implements Initializable {
     private TableColumn<Customer, String> tableColCustomerViewId;
     @javafx.fxml.FXML
     private TableColumn<Customer, String> tableColCustomerViewEmail;
+
+    private TransactionCreateController.DataCallback callback;
+
+    private Stage stage;
 
     private final ObservableList<Customer> customersObsList = FXCollections.observableArrayList();
 
@@ -118,6 +123,23 @@ public class CustomerViewController implements Initializable {
     public void btnCustomerViewSelect(ActionEvent actionEvent) {
         Customer selectedCustomer = (Customer) tableViewCustomerView.getSelectionModel().getSelectedItem();
         inputTextCustomerViewCustId.setText(selectedCustomer.getId());
-        // TODO: add data transfer to parent controller who call this stage
+        // TODO: add data transfer to parent controller who call this stage to customer
+        callback.receiveData(selectedCustomer);
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        stage.close();
+    }
+
+    public void setDataCallback(TransactionCreateController.DataCallback callback) {
+        this.callback = callback;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public void close() {
+        if (stage != null) {
+            stage.close();
+        }
     }
 }

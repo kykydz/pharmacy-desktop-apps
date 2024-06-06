@@ -6,17 +6,20 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.app.projectpharmacy.entities.Customer;
 import org.app.projectpharmacy.entities.Stock;
-import org.app.projectpharmacy.entities.Transaction;
 import org.app.projectpharmacy.entities.TransactionItem;
 import org.app.projectpharmacy.services.StockService;
 import org.app.projectpharmacy.services.TransactionService;
-import org.app.projectpharmacy.view.CustomerView;
+import org.app.projectpharmacy.utils.ScreenLoader;
 
 import java.io.IOException;
 import java.net.URL;
@@ -36,6 +39,8 @@ public class TransactionCreateController implements Initializable {
     public TextArea textAreaTrxCreateStockDetail;
     public Spinner<Integer> spinnerTrxCreateStock;
     public TextField textInputTrxCreateTotalPrice;
+    public TextArea textAreaTrxCreateCustomerDetail;
+    public Button btnTrxCreateInputStock;
     @javafx.fxml.FXML
     private AnchorPane trxCreatePane;
     @javafx.fxml.FXML
@@ -61,6 +66,12 @@ public class TransactionCreateController implements Initializable {
     @javafx.fxml.FXML
     private TextField textInputTrxCreateCustomerId;
 
+    public interface DataCallback {
+        void receiveData(Customer customer);
+    }
+
+    private Customer customerDataReceivedFromCustView;
+
     private final ObservableList<Stock> comboStockObsList = FXCollections.observableArrayList();
     private Stock currentSelectedComboItem;
 
@@ -73,9 +84,26 @@ public class TransactionCreateController implements Initializable {
     private StockService stockService;
 
     public void btnTrxCreateFindCustomer(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        CustomerView customerView = new CustomerView();
-        customerView.start(stage);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/app/projectpharmacy/customer-view.fxml"));
+        Parent childRoot = loader.load();
+        CustomerViewController childController = loader.getController();
+
+        // Set DataCallback for child controller (implementing CustomerDataCallback)
+        childController.setDataCallback(customer -> {
+            textInputTrxCreateCustomerId.setText(customer.getId());
+            textInputTrxCreateCustomerName.setText(customer.getName());
+
+            String customerText =
+                    STR."ID: \{customer.getId()}\nName: \{customer.getName()}\nPhone Number: \{customer.getPhoneNumber()}\nEmail Address: \{customer.getEmailAddress()}\nDescription: \{customer.getDescription()}\n";
+            textAreaTrxCreateCustomerDetail.setText(customerText);
+        });
+
+        Stage childStage = new Stage();
+        Scene childScene = new Scene(childRoot);
+        new ScreenLoader().setDefaultChildWindowSize(childScene, childStage);
+        childStage.setScene(childScene);
+        childStage.initModality(Modality.APPLICATION_MODAL);
+        childStage.showAndWait();
     }
 
     public void btnTrxCreateSaveRecord(ActionEvent actionEvent) throws SQLException {
@@ -193,5 +221,9 @@ public class TransactionCreateController implements Initializable {
     }
 
     public void onTextInputTrxCreateTotalPrice(ActionEvent actionEvent) {
+    }
+
+    public void setCustomerSelected(Customer customer) {
+        this.customerDataReceivedFromCustView = customer;
     }
 }

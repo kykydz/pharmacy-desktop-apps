@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ScreenLoader {
-    public void LoadWindow (FXMLLoader fxmlLoader, Stage stage) throws IOException {
+    public void LoadWindow(FXMLLoader fxmlLoader, Stage stage) throws IOException {
         Scene scene = new Scene(fxmlLoader.load());
 
         // Get the scene's root node
@@ -33,7 +33,7 @@ public class ScreenLoader {
         stage.show();
     }
 
-    public <T> void LoadChildWindow (FXMLLoader fxmlLoader, Stage primaryStage, T information) throws IOException {
+    public <T> void LoadChildWindow(FXMLLoader fxmlLoader, Stage primaryStage, T information) throws IOException {
         Scene scene = new Scene(fxmlLoader.load());
 
         // Get the scene's root node
@@ -58,5 +58,21 @@ public class ScreenLoader {
         childStage.setHeight(prefHeight);
         childStage.setScene(scene);
         childStage.showAndWait();
+    }
+
+    public void setDefaultChildWindowSize(Scene scene, Stage childStage) {
+        // Get the scene's root node
+        Parent root = scene.getRoot();
+
+        // Calculate preferred size based on layout bounds (same as before)
+        double prefWidth = root.prefWidth(-1);
+        double prefHeight = root.prefHeight(-1);
+
+        // Adjust for window decorations (optional)
+        prefWidth += 16;
+        prefHeight += 39;
+
+        childStage.setWidth(prefWidth);
+        childStage.setHeight(prefHeight);
     }
 }

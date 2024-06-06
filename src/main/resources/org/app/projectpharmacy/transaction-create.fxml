@@ -59,7 +59,7 @@
    <ComboBox fx:id="comboTrxCreateStockList" layoutX="141.0" layoutY="128.0" prefHeight="26.0" prefWidth="151.0" />
    <Button fx:id="btnTrxCreateInputStock" layoutX="143.0" layoutY="204.0" mnemonicParsing="false" onAction="#btnTrxCreateInputToTableview" prefHeight="26.0" prefWidth="151.0" text="Input" />
    <TextArea fx:id="textAreaTrxCreateStockDetail" editable="false" layoutX="302.0" layoutY="128.0" prefHeight="160.0" prefWidth="227.0" promptText="[ Stock Detail ]" />
-   <TextArea layoutX="302.0" layoutY="57.0" prefHeight="62.0" prefWidth="151.0" />
+   <TextArea fx:id="textAreaTrxCreateCustomerDetail" layoutX="302.0" layoutY="57.0" prefHeight="62.0" prefWidth="151.0" />
    <Label layoutX="17.0" layoutY="167.0" prefHeight="28.0" prefWidth="123.0" text="Select Stock Quantity">
       <font>
          <Font size="12.0" />
