@@ -61,6 +61,11 @@ public class TransactionItemRepository extends BaseRepository<TransactionItem> {
         return super.getMany(query, params);
     }
 
+    @Override
+    public void update(TransactionItem entity) {
+
+    }
+
     public List<TransactionItem> getTransactionItemByCustomerId(String transactionId) throws SQLException {
         String findQueryByName = "SELECT * FROM transaction_item WHERE transaction_id = ? ";
         Object[] params = { transactionId };

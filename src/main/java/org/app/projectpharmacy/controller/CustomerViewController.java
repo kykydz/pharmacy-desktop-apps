@@ -123,7 +123,7 @@ public class CustomerViewController implements Initializable {
     public void btnCustomerViewSelect(ActionEvent actionEvent) {
         Customer selectedCustomer = (Customer) tableViewCustomerView.getSelectionModel().getSelectedItem();
         inputTextCustomerViewCustId.setText(selectedCustomer.getId());
-        // TODO: add data transfer to parent controller who call this stage to customer
+        // transfer data to the caller
         callback.receiveData(selectedCustomer);
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.close();

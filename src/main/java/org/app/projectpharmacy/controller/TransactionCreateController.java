@@ -118,6 +118,23 @@ public class TransactionCreateController implements Initializable {
         List<TransactionItem> transactionItems = tableViewTrxCreateItems.getItems();
         transactionService.create(customerId, (int) totalPrice, "", transactionItems);
 
+        // update stock after transaction creation
+        for(TransactionItem transactionItem: transactionItemList){
+            String stockId = transactionItem.getStockId();
+            Integer prevStock = stockService.findStockById(stockId).getQuantityAvailable();
+            int quantity = prevStock - transactionItem.getQuantity();
+            stockService.updateStock(
+                    new Stock(
+                            stockId,
+                            null,
+                            null,
+                            0, quantity,
+                            null,
+                            null
+                    )
+            );
+        }
+
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.close();
     }
@@ -208,6 +225,7 @@ public class TransactionCreateController implements Initializable {
                 Timestamp.valueOf(LocalDateTime.now())
         );
         transactionItem.setStockData(currentSelectedComboItem);
+        transactionItemList.add(transactionItem);
         transactionItemObsList.add(transactionItem);
 
         double newTotalPrice = 0.0;
@@ -227,12 +245,5 @@ public class TransactionCreateController implements Initializable {
         String qty = STR."Qty: \{stock.getQuantityAvailable()} \n";
         String text = id + name + description + price + qty;
         textAreaTrxCreateStockDetail.setText(text);
-    }
-
-    public void onTextInputTrxCreateTotalPrice(ActionEvent actionEvent) {
-    }
-
-    public void setCustomerSelected(Customer customer) {
-        this.customerDataReceivedFromCustView = customer;
     }
 }

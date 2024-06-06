@@ -18,6 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.converter.NumberStringConverter;
+import org.app.projectpharmacy.entities.Customer;
 import org.app.projectpharmacy.entities.Stock;
 import org.app.projectpharmacy.services.StockService;
 import org.app.projectpharmacy.utils.ScreenLoader;
@@ -65,6 +66,10 @@ public class MainController implements Initializable {
     private final ObservableList<Stock> stocksObsList = FXCollections.observableArrayList();
 
     private Stage primaryStage;
+
+    public interface DataCallback {
+        void receiveData(Customer customer);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -151,8 +156,15 @@ public class MainController implements Initializable {
     }
 
     public void onBtnStockListCustomersView(ActionEvent actionEvent) throws IOException {
-        CustomerView customerView = new CustomerView();
-        customerView.start(primaryStage);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/app/projectpharmacy/customer-view.fxml"));
+        Parent childRoot = loader.load();
+
+        Stage childStage = new Stage();
+        Scene childScene = new Scene(childRoot);
+        new ScreenLoader().setDefaultChildWindowSize(childScene, childStage);
+        childStage.setScene(childScene);
+        childStage.initModality(Modality.APPLICATION_MODAL);
+        childStage.showAndWait();
     }
 
     public void btnStockListTransactionList(ActionEvent actionEvent) throws IOException {

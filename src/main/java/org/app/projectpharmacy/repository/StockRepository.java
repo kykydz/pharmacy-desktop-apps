@@ -61,6 +61,18 @@ public class StockRepository extends BaseRepository<Stock> {
     }
 
     @Override
+    public void update(Stock stock) {
+        String sql = "UPDATE stock SET quantity_available = ? WHERE id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, stock.getQuantityAvailable());
+            ps.setString(2, stock.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
     protected Stock mapResultSetToEntity(ResultSet rs) throws SQLException {
         return new Stock(
                 rs.getString("id"),

@@ -44,10 +44,9 @@ public abstract class BaseRepository<T> {
         return results.isEmpty() ? null : results.getFirst();
     }
 
-    protected abstract T mapResultSetToEntity(ResultSet rs) throws SQLException;
+    public abstract void update(T entity);
 
-    public void update(T entity, String updateQuery) throws SQLException {
-    }
+    protected abstract T mapResultSetToEntity(ResultSet rs) throws SQLException;
 
     public void delete(String id, String deleteQuery) throws SQLException {
 

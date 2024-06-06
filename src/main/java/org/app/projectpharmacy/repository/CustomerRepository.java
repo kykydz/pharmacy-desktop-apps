@@ -56,6 +56,11 @@ public class CustomerRepository extends BaseRepository<Customer> {
         return super.getMany(query, params);
     }
 
+    @Override
+    public void update(Customer entity) {
+
+    }
+
     public List<Customer> getByName(String name) throws SQLException {
         String findQueryByName = "SELECT * FROM customer WHERE name like ? ";
         Object[] params = { name };

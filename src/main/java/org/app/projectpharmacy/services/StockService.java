@@ -43,4 +43,8 @@ public class StockService {
     public Stock findStockById(String stockId) throws SQLException {
         return stockRepository.getById(stockId);
     }
+
+    public void updateStock(Stock stock) {
+        stockRepository.update(stock);
+    }
 }
