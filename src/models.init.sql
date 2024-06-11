@@ -24,7 +24,7 @@ CREATE TABLE transaction (
   id CHAR(36) PRIMARY KEY NOT null,  -- Use UUID data type
   customer_id CHAR(36) NOT NULL,
   total_price DECIMAL(10,2) NOT NULL,
-  meta_data JSON not null,
+  meta_data TEXT,
   created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (customer_id) REFERENCES customer(id)
