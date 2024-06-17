@@ -51,7 +51,7 @@ public class AuditTrailLogController implements Initializable {
         this._initTableView();
         try {
             auditTrailService = new AuditTrailService();
-            _clearAndPopulateTableView(null);
+            _clearAndPopulateTableView(null, false);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -62,7 +62,8 @@ public class AuditTrailLogController implements Initializable {
         String word = inputTextAuditTrailFindLog.getText();
         List<AuditTrail> auditTrails = auditTrailService.findLogByWord(word);
 
-        _clearAndPopulateTableView(auditTrails);
+        Boolean isFindResult = !word.isEmpty();
+        _clearAndPopulateTableView(auditTrails, isFindResult);
     }
 
     @javafx.fxml.FXML
@@ -83,9 +84,9 @@ public class AuditTrailLogController implements Initializable {
         tableViewAuditTrail.setItems(auditTrailObservableList);
     }
 
-    private void _clearAndPopulateTableView(List<AuditTrail> auditTrails) throws SQLException {
+    private void _clearAndPopulateTableView(List<AuditTrail> auditTrails, Boolean isFindResult) throws SQLException {
         tableViewAuditTrail.getItems().clear();
-        if (auditTrails == null || auditTrails.isEmpty()) {
+        if ((auditTrails == null || auditTrails.isEmpty()) && !isFindResult) {
             auditTrails = auditTrailService.fetchAllRecord();
         }
         auditTrailObservableList.setAll(auditTrails);

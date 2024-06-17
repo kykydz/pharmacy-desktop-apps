@@ -77,7 +77,7 @@ public class CustomerViewController implements Initializable {
         // fetch all data for first load
         try {
             customerService = new CustomerService();
-            this._clearAndPopulateTableView(null);
+            this._clearAndPopulateTableView(null, false);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -99,9 +99,9 @@ public class CustomerViewController implements Initializable {
         tableColCustomerViewUpdated.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getUpdated())));
     }
 
-    private void _clearAndPopulateTableView(List<Customer> customers) throws SQLException {
+    private void _clearAndPopulateTableView(List<Customer> customers, Boolean isFindResult) throws SQLException {
         tableViewCustomerView.getItems().clear();
-        if (customers == null || customers.isEmpty()) {
+        if ((customers == null || customers.isEmpty()) && !isFindResult) {
             customers = customerService.fetchAllRecord();
         }
         customersObsList.setAll(customers);
@@ -111,7 +111,8 @@ public class CustomerViewController implements Initializable {
     public void btnCustomerViewFind(ActionEvent actionEvent) throws SQLException {
         String name = inputTextCustomerViewFind.getText();
         List<Customer> customers = customerService.findCustomerByName(name);
-        this._clearAndPopulateTableView(customers);
+        Boolean isFindResult = !name.isEmpty();
+        this._clearAndPopulateTableView(customers, isFindResult);
     }
 
     public void onBtnCustomerViewCreateNew(ActionEvent actionEvent) throws IOException {

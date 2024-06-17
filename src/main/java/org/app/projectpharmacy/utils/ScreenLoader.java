@@ -27,6 +27,7 @@ public class ScreenLoader {
         prefWidth += 16;
         prefHeight += 39;
 
+        stage.setTitle("Pharmacy Apps");
         stage.setWidth(prefWidth);
         stage.setHeight(prefHeight);
         stage.setScene(scene);

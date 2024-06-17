@@ -126,20 +126,36 @@ public class MainController implements Initializable {
         // fetch all data for first load
         try {
             stockService = (StockService) new StockService();
-            this._clearAndPopulateTableView(null);
+            this._clearAndPopulateTableView(null, false);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
     public void onBtnStockListNewStock(ActionEvent actionEvent) throws IOException {
-        StockCreate stockCreate = new StockCreate();
-        stockCreate.start(primaryStage);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/app/projectpharmacy/stock-create.fxml"));
+        Parent childRoot = loader.load();
+
+        Stage childStage = new Stage();
+        Scene childScene = new Scene(childRoot);
+        new ScreenLoader().setDefaultChildWindowSize(childScene, childStage);
+        childStage.setTitle("Create New Stock");
+        childStage.setScene(childScene);
+        childStage.initModality(Modality.APPLICATION_MODAL);
+        childStage.showAndWait();
     }
 
     public void onBtnStockListNewTransaction(ActionEvent actionEvent) throws IOException {
-        TransactionCreate transactionCreate = new TransactionCreate();
-        transactionCreate.start(primaryStage);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/app/projectpharmacy/transaction-create.fxml"));
+        Parent childRoot = loader.load();
+
+        Stage childStage = new Stage();
+        Scene childScene = new Scene(childRoot);
+        new ScreenLoader().setDefaultChildWindowSize(childScene, childStage);
+        childStage.setTitle("Create New Transaction");
+        childStage.setScene(childScene);
+        childStage.initModality(Modality.APPLICATION_MODAL);
+        childStage.showAndWait();
     }
 
     public void onBtnStockListCreateNewUser(ActionEvent actionEvent) throws IOException {
@@ -150,12 +166,13 @@ public class MainController implements Initializable {
     public void onBtnStockListFindStock(ActionEvent actionEvent) throws SQLException {
         String medicationName = inputTextStockListFindStock.getText();
         List<Stock> stocks = stockService.findStockByName(medicationName);
-        this._clearAndPopulateTableView(stocks);
+        Boolean isFindResult = !medicationName.isEmpty();
+        this._clearAndPopulateTableView(stocks, isFindResult);
     }
 
-    private void _clearAndPopulateTableView(List<Stock> stocks) throws SQLException {
+    private void _clearAndPopulateTableView(List<Stock> stocks, Boolean isFindResult) throws SQLException {
         tableViewStockList.getItems().clear();
-        if (stocks == null || stocks.isEmpty()) {
+        if ((stocks == null || stocks.isEmpty()) && !isFindResult) {
             stocks = stockService.fetchAllRecord();
         }
         stocksObsList.setAll(stocks);
