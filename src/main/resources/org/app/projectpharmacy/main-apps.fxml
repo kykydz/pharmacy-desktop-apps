@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="paneStockList" prefHeight="332.0" prefWidth="544.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.projectpharmacy.controller.MainController">
+<AnchorPane fx:id="paneStockList" prefHeight="368.0" prefWidth="544.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.projectpharmacy.controller.MainController">
   <Label fx:id="welcomeText" />
   <Button fx:id="btnStockListFindStock" layoutX="487.0" layoutY="29.0" onAction="#onBtnStockListFindStock" text="Find" />
    <TableView id="table_stock" fx:id="tableViewStockList" layoutX="17.0" layoutY="82.0" prefHeight="200.0" prefWidth="511.0">
@@ -32,4 +32,5 @@
    <Button fx:id="btnStockListCustomersView" layoutX="151.0" layoutY="294.0" mnemonicParsing="false" onAction="#onBtnStockListCustomersView" prefHeight="26.0" prefWidth="114.0" text="Customers" />
    <Button fx:id="btnStockListTransactionList" layoutX="17.0" layoutY="294.0" mnemonicParsing="false" onAction="#btnStockListTransactionList" prefHeight="26.0" prefWidth="114.0" text="Transaction List" />
    <Label layoutX="17.0" layoutY="60.0" text="Stock List" />
+   <Button fx:id="btnStockListAuditLog" layoutX="17.0" layoutY="330.0" mnemonicParsing="false" onAction="#btnStockListAuditLog" prefHeight="26.0" prefWidth="114.0" text="Audit Trail" />
 </AnchorPane>

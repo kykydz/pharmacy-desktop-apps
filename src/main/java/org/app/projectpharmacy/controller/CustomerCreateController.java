@@ -1,5 +1,6 @@
 package org.app.projectpharmacy.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -43,7 +44,7 @@ public class CustomerCreateController implements Initializable {
         }
     }
 
-    public void btnCreateCustomerCreate(ActionEvent actionEvent) throws SQLException {
+    public void btnCreateCustomerCreate(ActionEvent actionEvent) throws SQLException, JsonProcessingException {
         String name = inputTextCreateCustomerName.getText();
         String phoneNumber = inputTextCreateCustomerWANumber.getText();
         String email = inputTextCreateCustomerEmail.getText();

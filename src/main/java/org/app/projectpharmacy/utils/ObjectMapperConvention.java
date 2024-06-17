@@ -1,8 +1,13 @@
 package org.app.projectpharmacy.utils;
 
+
 import java.util.HashMap;
 import java.util.Map;
 import java.lang.reflect.Field;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.gson.Gson;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ObjectMapperConvention {
     public static <T> Map<String, Object> toMap(T object, boolean toCamelCase) {
@@ -44,6 +49,14 @@ public class ObjectMapperConvention {
             // Handle exceptions appropriately (e.g., logging)
             throw new RuntimeException("Error creating object from map", e);
         }
+    }
+
+    public static String toJson(Object object) throws JsonProcessingException {
+//        Gson gson = new Gson();
+//        return gson.toJson(object);
+
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.writeValueAsString(object);
     }
 }
 

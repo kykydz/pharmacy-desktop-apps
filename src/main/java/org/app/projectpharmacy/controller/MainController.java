@@ -42,6 +42,7 @@ public class MainController implements Initializable {
     public Button btnStockListCustomersView;
     public Button btnStockListTransactionList;
     public Label labelStockListTime;
+    public Button btnStockListAuditLog;
     private StockService stockService;
     @FXML
     public Button btnStockListNewTransaction;
@@ -168,6 +169,7 @@ public class MainController implements Initializable {
         Stage childStage = new Stage();
         Scene childScene = new Scene(childRoot);
         new ScreenLoader().setDefaultChildWindowSize(childScene, childStage);
+        childStage.setTitle("Customer List");
         childStage.setScene(childScene);
         childStage.initModality(Modality.APPLICATION_MODAL);
         childStage.showAndWait();
@@ -180,6 +182,20 @@ public class MainController implements Initializable {
         Stage childStage = new Stage();
         Scene childScene = new Scene(childRoot);
         new ScreenLoader().setDefaultChildWindowSize(childScene, childStage);
+        childStage.setTitle("Transaction List");
+        childStage.setScene(childScene);
+        childStage.initModality(Modality.APPLICATION_MODAL);
+        childStage.showAndWait();
+    }
+
+    public void btnStockListAuditLog(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/app/projectpharmacy/audit-trail.fxml"));
+        Parent childRoot = loader.load();
+
+        Stage childStage = new Stage();
+        Scene childScene = new Scene(childRoot);
+        new ScreenLoader().setDefaultChildWindowSize(childScene, childStage);
+        childStage.setTitle("Audit Log");
         childStage.setScene(childScene);
         childStage.initModality(Modality.APPLICATION_MODAL);
         childStage.showAndWait();

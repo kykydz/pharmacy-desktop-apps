@@ -40,3 +40,13 @@ create table transaction_item (
 	FOREIGN KEY (transaction_id) REFERENCES transaction(id)
 )
 
+-- only store important event CREATE/UPDATE/DELETE
+create table audit_trail (
+    id CHAR(36) PRIMARY KEY NOT null,  -- Use UUID data type
+    admin_id VARCHAR(255) NOT NULL,
+    feature_accessed VARCHAR(255) NOT NULL, -- e.g. CREATE/UPDATE_STOCK/CUSTOMER
+    "action" VARCHAR(255) NOT NULL, -- e.g. CREATE/UPDATE
+    meta_data TEXT, -- e.g. what data being inserted
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+)

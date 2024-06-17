@@ -5,6 +5,9 @@ module org.app.projectpharmacy {
     requires org.controlsfx.controls;
     requires org.kordamp.bootstrapfx.core;
     requires java.sql;
+    requires com.google.gson;
+    requires com.fasterxml.jackson.core;
+    requires com.fasterxml.jackson.databind;
 
     opens org.app.projectpharmacy to javafx.fxml;
     exports org.app.projectpharmacy;

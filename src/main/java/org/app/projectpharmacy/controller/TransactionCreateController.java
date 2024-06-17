@@ -1,5 +1,6 @@
 package org.app.projectpharmacy.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -107,12 +108,13 @@ public class TransactionCreateController implements Initializable {
         Stage childStage = new Stage();
         Scene childScene = new Scene(childRoot);
         new ScreenLoader().setDefaultChildWindowSize(childScene, childStage);
+        childStage.setTitle("Customer List");
         childStage.setScene(childScene);
         childStage.initModality(Modality.APPLICATION_MODAL);
         childStage.showAndWait();
     }
 
-    public void btnTrxCreateSaveRecord(ActionEvent actionEvent) throws SQLException {
+    public void btnTrxCreateSaveRecord(ActionEvent actionEvent) throws SQLException, JsonProcessingException {
         String customerId = textInputTrxCreateCustomerId.getText();
         // get records of transactionItems from tableview
         List<TransactionItem> transactionItems = tableViewTrxCreateItems.getItems();

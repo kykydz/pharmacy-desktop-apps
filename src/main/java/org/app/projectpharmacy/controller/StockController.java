@@ -1,5 +1,6 @@
 package org.app.projectpharmacy.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -48,7 +49,7 @@ public class StockController implements Initializable {
         }
     }
 
-    public void onBtnNewStockCreate(ActionEvent actionEvent) throws SQLException {
+    public void onBtnNewStockCreate(ActionEvent actionEvent) throws SQLException, JsonProcessingException {
         String medicationName = inputTextNewStockMedicationName.getText();
         Integer price = Integer.parseInt(inputTextNewStockPrice.getText());
         Integer stockQuantity = Integer.parseInt(inputTextNewStockQuantity.getText());
