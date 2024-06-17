@@ -1,9 +1,7 @@
 package org.app.projectpharmacy.services;
 
-import javafx.stage.Stage;
 import org.app.projectpharmacy.entities.AuditTrail;
 import org.app.projectpharmacy.repository.AuditTrailRepository;
-import org.app.projectpharmacy.repository.CustomerRepository;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;

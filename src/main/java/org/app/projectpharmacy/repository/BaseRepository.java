@@ -1,6 +1,5 @@
 package org.app.projectpharmacy.repository;
 
-import org.app.projectpharmacy.entities.Stock;
 import org.app.projectpharmacy.utils.DatabaseManager;
 
 import java.sql.Connection;

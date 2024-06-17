@@ -6,7 +6,6 @@ import java.util.Map;
 import java.lang.reflect.Field;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.google.gson.Gson;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ObjectMapperConvention {

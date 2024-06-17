@@ -1,9 +1,6 @@
 package org.app.projectpharmacy.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import javafx.beans.Observable;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -12,13 +9,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.app.projectpharmacy.entities.Stock;
 import org.app.projectpharmacy.services.StockService;
 
 import java.net.URL;
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class StockController implements Initializable {

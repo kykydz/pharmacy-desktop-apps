@@ -4,7 +4,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -12,17 +11,12 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.app.projectpharmacy.entities.Customer;
-import org.app.projectpharmacy.entities.Stock;
 import org.app.projectpharmacy.services.CustomerService;
-import org.app.projectpharmacy.services.StockService;
 import org.app.projectpharmacy.view.CustomerCreate;
-import org.app.projectpharmacy.view.CustomerView;
-import org.app.projectpharmacy.view.TransactionCreate;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.ResourceBundle;
 

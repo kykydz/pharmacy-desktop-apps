@@ -10,7 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.app.projectpharmacy.services.CustomerService;
-import org.app.projectpharmacy.services.StockService;
 
 import java.net.URL;
 import java.sql.SQLException;

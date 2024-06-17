@@ -3,9 +3,7 @@ package org.app.projectpharmacy.services;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.app.projectpharmacy.entities.Stock;
 import org.app.projectpharmacy.repository.StockRepository;
-import org.app.projectpharmacy.utils.DatabaseManager;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;

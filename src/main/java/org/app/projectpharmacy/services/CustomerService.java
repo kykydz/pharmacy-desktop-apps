@@ -1,16 +1,13 @@
 package org.app.projectpharmacy.services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import javafx.fxml.Initializable;
 import org.app.projectpharmacy.entities.Customer;
 import org.app.projectpharmacy.repository.CustomerRepository;
 
-import java.net.URL;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.ResourceBundle;
 import java.util.UUID;
 
 import static org.app.projectpharmacy.utils.ObjectMapperConvention.toJson;

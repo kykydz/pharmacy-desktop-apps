@@ -1,20 +1,16 @@
 package org.app.projectpharmacy.controller;
 
-import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -25,16 +21,10 @@ import org.app.projectpharmacy.entities.Stock;
 import org.app.projectpharmacy.services.StockService;
 import org.app.projectpharmacy.utils.ScreenLoader;
 import org.app.projectpharmacy.view.CustomerCreate;
-import org.app.projectpharmacy.view.CustomerView;
-import org.app.projectpharmacy.view.StockCreate;
-import org.app.projectpharmacy.view.TransactionCreate;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
 

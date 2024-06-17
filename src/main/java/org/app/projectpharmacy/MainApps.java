@@ -2,9 +2,7 @@ package org.app.projectpharmacy;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.app.projectpharmacy.controller.MainController;
 import org.app.projectpharmacy.utils.ScreenLoader;
 
 import java.io.IOException;

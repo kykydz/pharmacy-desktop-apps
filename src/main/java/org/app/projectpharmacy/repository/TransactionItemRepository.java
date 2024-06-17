@@ -1,6 +1,5 @@
 package org.app.projectpharmacy.repository;
 
-import org.app.projectpharmacy.entities.Transaction;
 import org.app.projectpharmacy.entities.TransactionItem;
 
 import java.sql.PreparedStatement;

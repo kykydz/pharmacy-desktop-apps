@@ -1,6 +1,5 @@
 package org.app.projectpharmacy.controller;
 
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,9 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.app.projectpharmacy.entities.AuditTrail;
-import org.app.projectpharmacy.entities.Transaction;
 import org.app.projectpharmacy.services.AuditTrailService;
-import org.app.projectpharmacy.services.TransactionService;
 
 import java.net.URL;
 import java.sql.SQLException;

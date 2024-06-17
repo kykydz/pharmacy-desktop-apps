@@ -1,7 +1,6 @@
 package org.app.projectpharmacy.controller;
 
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,16 +8,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.app.projectpharmacy.entities.Customer;
 import org.app.projectpharmacy.entities.Transaction;
 import org.app.projectpharmacy.services.TransactionService;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.ResourceBundle;
 

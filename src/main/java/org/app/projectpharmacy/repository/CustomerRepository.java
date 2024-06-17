@@ -1,9 +1,7 @@
 package org.app.projectpharmacy.repository;
 
 import org.app.projectpharmacy.entities.Customer;
-import org.app.projectpharmacy.entities.Stock;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
