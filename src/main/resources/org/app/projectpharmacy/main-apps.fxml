@@ -8,10 +8,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="paneStockList" prefHeight="344.0" prefWidth="544.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.projectpharmacy.controller.MainController">
+<AnchorPane fx:id="paneStockList" prefHeight="332.0" prefWidth="544.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.projectpharmacy.controller.MainController">
   <Label fx:id="welcomeText" />
   <Button fx:id="btnStockListFindStock" layoutX="487.0" layoutY="29.0" onAction="#onBtnStockListFindStock" text="Find" />
-   <TableView id="table_stock" fx:id="tableViewStockList" layoutX="17.0" layoutY="59.0" prefHeight="200.0" prefWidth="511.0">
+   <TableView id="table_stock" fx:id="tableViewStockList" layoutX="17.0" layoutY="82.0" prefHeight="200.0" prefWidth="511.0">
      <columns>
        <TableColumn id="col_id" fx:id="tableColStockListId" prefWidth="49.0" text="ID" />
        <TableColumn id="col_med_name" fx:id="tableColStockListMedicationName" prefWidth="162.0" text="Medication Name" />
@@ -20,16 +20,16 @@
          <TableColumn id="col_description" fx:id="tableColStockListDescription" prefWidth="117.0" text="Description" />
      </columns>
    </TableView>
-   <Label layoutX="17.0" layoutY="17.0" text="Medication Stock List">
+   <Label layoutX="17.0" layoutY="17.0" text="Pharmacy Apps">
       <font>
          <Font size="22.0" />
       </font>
    </Label>
    <Label layoutX="315.0" layoutY="9.0" text="Find Medication" />
-   <Button fx:id="btnStockListNewStock" layoutX="426.0" layoutY="271.0" mnemonicParsing="false" onAction="#onBtnStockListNewStock" text="Add New Stock" />
-   <Button fx:id="btnStockListNewTransaction" layoutX="275.0" layoutY="271.0" mnemonicParsing="false" onAction="#onBtnStockListNewTransaction" prefHeight="26.0" prefWidth="142.0" text="New Transaction" />
+   <Button fx:id="btnStockListNewStock" layoutX="426.0" layoutY="294.0" mnemonicParsing="false" onAction="#onBtnStockListNewStock" text="Add New Stock" />
+   <Button fx:id="btnStockListNewTransaction" layoutX="275.0" layoutY="294.0" mnemonicParsing="false" onAction="#onBtnStockListNewTransaction" prefHeight="26.0" prefWidth="142.0" text="New Transaction" />
    <TextField fx:id="inputTextStockListFindStock" layoutX="315.0" layoutY="29.0" />
-   <Button fx:id="btnStockListCustomersView" layoutX="151.0" layoutY="271.0" mnemonicParsing="false" onAction="#onBtnStockListCustomersView" prefHeight="26.0" prefWidth="114.0" text="Customers" />
-   <Button fx:id="btnStockListTransactionList" layoutX="17.0" layoutY="271.0" mnemonicParsing="false" onAction="#btnStockListTransactionList" prefHeight="26.0" prefWidth="114.0" text="Transaction List" />
-   <Label fx:id="labelStockListTime" layoutX="17.0" layoutY="313.0" text="Time:" />
+   <Button fx:id="btnStockListCustomersView" layoutX="151.0" layoutY="294.0" mnemonicParsing="false" onAction="#onBtnStockListCustomersView" prefHeight="26.0" prefWidth="114.0" text="Customers" />
+   <Button fx:id="btnStockListTransactionList" layoutX="17.0" layoutY="294.0" mnemonicParsing="false" onAction="#btnStockListTransactionList" prefHeight="26.0" prefWidth="114.0" text="Transaction List" />
+   <Label layoutX="17.0" layoutY="60.0" text="Stock List" />
 </AnchorPane>
