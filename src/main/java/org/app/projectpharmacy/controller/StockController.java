@@ -1,6 +1,5 @@
 package org.app.projectpharmacy.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -11,7 +10,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.app.projectpharmacy.entities.Stock;
 import org.app.projectpharmacy.services.StockService;
+import org.app.projectpharmacy.utils.Modal;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -46,7 +47,7 @@ public class StockController implements Initializable {
         }
     }
 
-    public void onBtnNewStockCreate(ActionEvent actionEvent) throws SQLException, JsonProcessingException {
+    public void onBtnNewStockCreate(ActionEvent actionEvent) throws SQLException, IOException {
         String medicationName = inputTextNewStockMedicationName.getText();
         Integer price = Integer.parseInt(inputTextNewStockPrice.getText());
         Integer stockQuantity = Integer.parseInt(inputTextNewStockQuantity.getText());
@@ -54,6 +55,8 @@ public class StockController implements Initializable {
 
         Stock stockCreated = stockService.create(medicationName, price, stockQuantity, stockDescription);
         this.stockCallback.setStockData(stockCreated);
+
+        new Modal().showNotification("CREATE STOCK SUCCESS", "Stock record is saved to database");
 
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.close();

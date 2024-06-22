@@ -21,4 +21,8 @@ public class DataTransfer {
     public interface transactionItemCallback {
         void setTransactionItemsData(TransactionItem[] transactionItems);
     }
+
+    public interface notifCallback {
+        void setNotifData(String notifTitle, String notifMessage);
+    }
 }

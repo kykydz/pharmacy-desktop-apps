@@ -1,6 +1,5 @@
 package org.app.projectpharmacy.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -20,6 +19,7 @@ import org.app.projectpharmacy.entities.Stock;
 import org.app.projectpharmacy.entities.TransactionItem;
 import org.app.projectpharmacy.services.StockService;
 import org.app.projectpharmacy.services.TransactionService;
+import org.app.projectpharmacy.utils.Modal;
 import org.app.projectpharmacy.utils.ScreenLoader;
 
 import java.io.IOException;
@@ -107,7 +107,7 @@ public class TransactionCreateController implements Initializable {
         childStage.showAndWait();
     }
 
-    public void btnTrxCreateSaveRecord(ActionEvent actionEvent) throws SQLException, JsonProcessingException {
+    public void btnTrxCreateSaveRecord(ActionEvent actionEvent) throws SQLException, IOException {
         String customerId = textInputTrxCreateCustomerId.getText();
         // get records of transactionItems from tableview
         List<TransactionItem> transactionItems = tableViewTrxCreateItems.getItems();
@@ -129,6 +129,8 @@ public class TransactionCreateController implements Initializable {
                     )
             );
         }
+
+        new Modal().showNotification("CREATE TRANSACTION SUCCESS", "Transaction record is saved to database");
 
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.close();
