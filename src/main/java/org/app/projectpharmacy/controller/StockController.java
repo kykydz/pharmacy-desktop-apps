@@ -9,6 +9,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.app.projectpharmacy.entities.Stock;
 import org.app.projectpharmacy.services.StockService;
 
 import java.net.URL;
@@ -33,6 +34,8 @@ public class StockController implements Initializable {
 
     private StockService stockService;
 
+    private DataTransfer.stockCallback stockCallback;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -49,7 +52,8 @@ public class StockController implements Initializable {
         Integer stockQuantity = Integer.parseInt(inputTextNewStockQuantity.getText());
         String stockDescription = inputTextAreaNewStockDescription.getText();
 
-        stockService.create(medicationName, price, stockQuantity, stockDescription);
+        Stock stockCreated = stockService.create(medicationName, price, stockQuantity, stockDescription);
+        this.stockCallback.setStockData(stockCreated);
 
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.close();
@@ -58,5 +62,9 @@ public class StockController implements Initializable {
     public void btnNewStockCancel(ActionEvent actionEvent) {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.close();
+    }
+
+    public void setStockCallback(DataTransfer.stockCallback stockCallback) {
+        this.stockCallback = stockCallback;
     }
 }

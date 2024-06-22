@@ -126,6 +126,13 @@ public class MainController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/app/projectpharmacy/stock-create.fxml"));
         Parent childRoot = loader.load();
 
+        StockController childController = loader.getController();
+
+        // Set DataCallback for child controller (implementing CustomerDataCallback)
+        childController.setStockCallback(_stock -> {
+            this._populateTableStockList();
+        });
+
         Stage childStage = new Stage();
         Scene childScene = new Scene(childRoot);
         new ScreenLoader().setDefaultChildWindowSize(childScene, childStage);

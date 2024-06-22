@@ -9,6 +9,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.app.projectpharmacy.entities.Customer;
 import org.app.projectpharmacy.services.CustomerService;
 
 import java.net.URL;
@@ -33,6 +34,8 @@ public class CustomerCreateController implements Initializable {
 
     private CustomerService customerService;
 
+    private DataTransfer.customerCallback customerCallback;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -48,7 +51,9 @@ public class CustomerCreateController implements Initializable {
         String phoneNumber = inputTextCreateCustomerWANumber.getText();
         String email = inputTextCreateCustomerEmail.getText();
         String description = inputTextAreaCreateCustomerDescription.getText();
-        customerService.create(name, phoneNumber, email, description);
+        Customer customerCreated = customerService.create(name, phoneNumber, email, description);
+
+        this.customerCallback.setCustomerData(customerCreated);
 
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.close();
@@ -57,5 +62,9 @@ public class CustomerCreateController implements Initializable {
     public void btnCreateCustomerCancel(ActionEvent actionEvent) {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.close();
+    }
+
+    public void setCustomerCallback(DataTransfer.customerCallback customerCallback) {
+        this.customerCallback = customerCallback;
     }
 }

@@ -37,8 +37,7 @@ public class CustomerRepository extends BaseRepository<Customer> {
             ps.setString(1, customer.getId());
             ps.setString(2, customer.getName());
             ps.setString(3, customer.getPhoneNumber());
-            ps.setString(4, customer.getPhoneNumber());
-            ps.setString(5, customer.getEmailAddress());
+            ps.setString(4, customer.getEmailAddress());
             ps.setString(5, customer.getDescription());
             ps.setTimestamp(6, customer.getCreated());
             ps.setTimestamp(7, customer.getUpdated());

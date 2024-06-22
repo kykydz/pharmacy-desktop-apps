@@ -16,7 +16,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.app.projectpharmacy.entities.Customer;
 import org.app.projectpharmacy.entities.Stock;
 import org.app.projectpharmacy.entities.TransactionItem;
 import org.app.projectpharmacy.services.StockService;
@@ -73,12 +72,6 @@ public class TransactionCreateController implements Initializable {
         stage.close();
     }
 
-    public interface DataCallback {
-        void receiveData(Customer customer);
-    }
-
-    private Customer customerDataReceivedFromCustView;
-
     private final ObservableList<Stock> comboStockObsList = FXCollections.observableArrayList();
     private Stock currentSelectedComboItem;
 
@@ -96,7 +89,7 @@ public class TransactionCreateController implements Initializable {
         CustomerViewController childController = loader.getController();
 
         // Set DataCallback for child controller (implementing CustomerDataCallback)
-        childController.setDataCallback(customer -> {
+        childController.setCustomerCallback(customer -> {
             textInputTrxCreateCustomerId.setText(customer.getId());
             textInputTrxCreateCustomerName.setText(customer.getName());
 

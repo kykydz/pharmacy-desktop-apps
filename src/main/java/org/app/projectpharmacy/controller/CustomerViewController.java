@@ -4,15 +4,19 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.app.projectpharmacy.entities.Customer;
 import org.app.projectpharmacy.services.CustomerService;
-import org.app.projectpharmacy.view.CustomerCreate;
+import org.app.projectpharmacy.utils.ScreenLoader;
 
 import java.io.IOException;
 import java.net.URL;
@@ -55,7 +59,7 @@ public class CustomerViewController implements Initializable {
     @javafx.fxml.FXML
     private TableColumn<Customer, String> tableColCustomerViewEmail;
 
-    private TransactionCreateController.DataCallback callback;
+    private DataTransfer.customerCallback customerCallback;
 
     private Stage stage;
 
@@ -110,23 +114,38 @@ public class CustomerViewController implements Initializable {
     }
 
     public void onBtnCustomerViewCreateNew(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        CustomerCreate customerCreate = new CustomerCreate();
-        customerCreate.start(stage);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/app/projectpharmacy/customer-create.fxml"));
+        Parent childRoot = loader.load();
+
+        CustomerCreateController childController = loader.getController();
+
+        // Set DataCallback for child controller (implementing CustomerDataCallback)
+        childController.setCustomerCallback(_customer -> {
+            this._populateTableStockList();
+        });
+
+        Stage childStage = new Stage();
+        Scene childScene = new Scene(childRoot);
+        new ScreenLoader().setDefaultChildWindowSize(childScene, childStage);
+        childStage.setTitle("Create New Stock");
+        childStage.setScene(childScene);
+        childStage.initModality(Modality.APPLICATION_MODAL);
+        childStage.showAndWait();
     }
 
     public void btnCustomerViewSelect(ActionEvent actionEvent) {
         Customer selectedCustomer = (Customer) tableViewCustomerView.getSelectionModel().getSelectedItem();
         inputTextCustomerViewCustId.setText(selectedCustomer.getId());
         // transfer data to the caller
-        callback.receiveData(selectedCustomer);
+        customerCallback.setCustomerData(selectedCustomer);
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.close();
     }
 
-    public void setDataCallback(TransactionCreateController.DataCallback callback) {
-        this.callback = callback;
+    public void setCustomerCallback(DataTransfer.customerCallback customerCallback) {
+        this.customerCallback = customerCallback;
     }
+
 
     public void setStage(Stage stage) {
         this.stage = stage;
